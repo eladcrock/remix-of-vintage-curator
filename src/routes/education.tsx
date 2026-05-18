@@ -246,7 +246,7 @@ function EducationPage() {
         </>
         )}
       </main>
-      <ClassReadDialog classId={readClassId} onClose={() => setReadClassId(null)} />
+      
     </div>
   );
 }
