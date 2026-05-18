@@ -320,7 +320,6 @@ function Index() {
             {([
               ["all", "All sizes"],
               ["standard", "Standard 750mL"],
-              ["large", "Large format 1.5L+"],
               ["half", "Half 375mL"],
             ] as [FormatFilter, string][]).map(([key, label]) => {
               const active = state.format === key;
