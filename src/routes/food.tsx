@@ -52,11 +52,7 @@ function useUrlQuery() {
 
 function FoodPage() {
   const [q, setQ] = useUrlQuery();
-  const [showLunch, setShowLunch] = useState(false);
-  const filtered = useMemo(() => {
-    const list = filterDishes(q);
-    return showLunch ? list : list.filter((d) => d.category !== "Lunch Only");
-  }, [q, showLunch]);
+  const filtered = useMemo(() => filterDishes(q), [q]);
   const grouped = useMemo(() => groupByCategory(filtered), [filtered]);
   const tagSuggestions = useMemo(() => allDietaryTags(), []);
 
