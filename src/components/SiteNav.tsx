@@ -18,6 +18,7 @@ const TABS: Tab[] = [
   { to: "/food", label: "Food", enabled: true },
   { to: "/experiences", label: "Experiences", enabled: true },
   { to: "/education", label: "Education", enabled: true },
+  { to: "/about", label: "About Scoma's", enabled: true },
 ];
 
 export function SiteNav({
