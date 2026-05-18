@@ -179,8 +179,9 @@ export function RegionMap({
 
   // Default viewBox per country — France is small/clustered, so we crop in.
   const DEFAULTS: Record<Country, { x: number; y: number; w: number; h: number }> = {
-    Italy:  { x: 10, y: 10, w: 80, h: 90 },
-    France: { x: 14, y: 14, w: 60, h: 60 },
+    Italy:      { x: 10, y: 10, w: 80, h: 90 },
+    France:     { x: 14, y: 14, w: 60, h: 60 },
+    California: { x: 4,  y: 4,  w: 60, h: 92 },
   };
 
   const [vb, setVb] = useState(DEFAULTS[country]);
