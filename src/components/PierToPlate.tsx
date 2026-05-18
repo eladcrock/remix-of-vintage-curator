@@ -383,3 +383,74 @@ function SourcingMap({ pins }: { pins: SourcePin[] }) {
     </svg>
   );
 }
+
+function OysterMap({ pins }: { pins: OysterPin[] }) {
+  return (
+    <svg
+      viewBox="0 0 100 70"
+      className="h-auto w-full"
+      aria-label="World oyster sourcing map"
+      role="img"
+    >
+      <rect x="0" y="0" width="100" height="70" fill="oklch(0.22 0.04 240)" />
+      {/* Schematic continents (not geo-accurate) */}
+      {/* North America */}
+      <path
+        d="M5 18 L22 14 L34 22 L34 38 L28 52 L18 56 L10 48 L6 36 Z"
+        fill="oklch(0.28 0.03 90)"
+        stroke="oklch(0.35 0.04 90)"
+        strokeWidth="0.3"
+      />
+      {/* South America */}
+      <path
+        d="M24 54 L30 52 L32 64 L26 68 L22 60 Z"
+        fill="oklch(0.28 0.03 90)"
+        stroke="oklch(0.35 0.04 90)"
+        strokeWidth="0.3"
+      />
+      {/* Europe / Africa */}
+      <path
+        d="M44 18 L58 16 L60 28 L56 42 L60 60 L52 64 L46 50 L44 34 Z"
+        fill="oklch(0.28 0.03 90)"
+        stroke="oklch(0.35 0.04 90)"
+        strokeWidth="0.3"
+      />
+      {/* Asia */}
+      <path
+        d="M60 14 L92 14 L96 30 L86 44 L74 42 L66 30 L62 22 Z"
+        fill="oklch(0.28 0.03 90)"
+        stroke="oklch(0.35 0.04 90)"
+        strokeWidth="0.3"
+      />
+      {/* Australia */}
+      <path
+        d="M82 54 L94 54 L94 62 L84 64 Z"
+        fill="oklch(0.28 0.03 90)"
+        stroke="oklch(0.35 0.04 90)"
+        strokeWidth="0.3"
+      />
+
+      {pins.map((p) => (
+        <g key={p.id}>
+          <circle
+            cx={p.x}
+            cy={p.y}
+            r="1.4"
+            fill="oklch(0.72 0.18 30)"
+            stroke="oklch(0.98 0 0)"
+            strokeWidth="0.4"
+          />
+          <text
+            x={p.x + 2}
+            y={p.y + 1}
+            fontSize="2.2"
+            fill="oklch(0.95 0.02 240)"
+          >
+            {p.short}
+          </text>
+        </g>
+      ))}
+    </svg>
+  );
+}
+
