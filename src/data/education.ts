@@ -4,7 +4,7 @@
  * viewBox for its country's stylized SVG map.
  */
 
-export type Country = "Italy" | "France";
+export type Country = "Italy" | "France" | "California";
 
 export type GrapeNote = {
   name: string;
@@ -16,7 +16,8 @@ export type Region = {
   id: string;
   name: string;
   country: Country;
-  classRef: 1 | 2 | 3 | 4 | 5;
+  /** Optional — only used for the Italy/France Wine Class #1–#5 curriculum. */
+  classRef?: 1 | 2 | 3 | 4 | 5;
   zone?: string;
   x: number;
   y: number;
