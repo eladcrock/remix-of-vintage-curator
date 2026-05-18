@@ -46,8 +46,8 @@ const SOURCING: SourcePin[] = [
     name: "Washington & Oregon Coast",
     x: 42,
     y: 42,
-    species: ["Dungeness Crab", "Petrale Sole", "Rockfish"],
-    note: "Pots and hook-and-line fisheries supplementing California's Dungeness season.",
+    species: ["Dungeness Crab", "Petrale Sole", "Rockfish", "Hood Canal Oysters"],
+    note: "Pots and hook-and-line fisheries supplementing California's Dungeness season; Hood Canal (Puget Sound) is one of the world's great oyster nurseries and supplies many of our Pacific varieties.",
   },
   {
     id: "norcal",
