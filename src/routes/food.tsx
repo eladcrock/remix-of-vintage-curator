@@ -122,10 +122,9 @@ function FoodPage() {
                 Show all
               </button>
             )}
-          </props>
-
           </div>
         </div>
+
 
         {filtered.length === 0 ? (
           <div className="mt-3 rounded-lg border border-dashed border-border bg-card/50 px-4 py-10 text-center text-sm text-muted-foreground">
