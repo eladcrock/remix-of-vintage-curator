@@ -1,7 +1,7 @@
 /**
  * Bar Program tab.
  *
- * Single search bar — queries across name, menu description, ingredients,
+ * Single search bar, queries across name, menu description, ingredients,
  * dietary tags, garnish, character, story, etc. (see searchHaystack in
  * src/lib/cocktails.ts). Multi-word queries are AND-matched.
  *

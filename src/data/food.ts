@@ -1,5 +1,5 @@
 /**
- * Scoma's San Francisco — food menu (from scomas.com, updated March 2025).
+ * Scoma's San Francisco, food menu (from scomas.com, updated March 2025).
  * Menu descriptions only. gf = gluten-free, v = vegan, veg = vegetarian.
  */
 import type { Dish } from "@/lib/food";
@@ -26,7 +26,7 @@ export const DISHES: Dish[] = [
   { id: "beet-salad", name: "Organic Roasted Beet Salad", category: "Soup & Salad", description: "Salt-roasted red & golden beets, avocado, orange, aged balsamic, fresh horseradish.", dietaryRestrictions: ["gf", "v"], price: "$17" },
 
   // ---- Scoma's Classics ----
-  { id: "crab-cakes", name: "Dungeness Crab Cakes Appetizer", category: "Scoma's Classics", description: "Scoma's signature crab cakes — popular since 1965.", dietaryRestrictions: ["Shellfish", "Gluten"], price: "$26" },
+  { id: "crab-cakes", name: "Dungeness Crab Cakes Appetizer", category: "Scoma's Classics", description: "Scoma's signature crab cakes, popular since 1965.", dietaryRestrictions: ["Shellfish", "Gluten"], price: "$26" },
   { id: "whole-dungeness", name: "Whole Dungeness Crab", category: "Scoma's Classics", description: "Your choice of chilled or whole roasted.", dietaryRestrictions: ["gf", "Shellfish"], price: "$75" },
   { id: "crab-louie", name: "Scoma's Dungeness Crab Louie Salad", category: "Scoma's Classics", description: "Half pound of crabmeat over greens with Louie dressing.", dietaryRestrictions: ["gf", "Shellfish", "Egg"], price: "$72" },
   { id: "shrimp-louie", name: "Wild Gulf Shrimp Louis Salad", category: "Scoma's Classics", description: "Half pound of shrimp over greens with Louie dressing.", dietaryRestrictions: ["gf", "Shellfish", "Egg"], price: "$43" },
@@ -49,7 +49,7 @@ export const DISHES: Dish[] = [
 
   // ---- Pastas ----
   { id: "shrimp-lumachini", name: "Gulf Shrimp Lumachini", category: "Pastas", description: "Sautéed gulf shrimp, fresh herbs, garlic and gremolata.", dietaryRestrictions: ["Shellfish", "Gluten"], price: "$36" },
-  { id: "linguini-vongole", name: "Linguini con Vongole", category: "Pastas", description: "Pasta a la Scoma — Manila clams, garlic, onions, white wine, butter.", dietaryRestrictions: ["Shellfish", "Dairy", "Gluten"], price: "$36" },
+  { id: "linguini-vongole", name: "Linguini con Vongole", category: "Pastas", description: "Pasta a la Scoma, Manila clams, garlic, onions, white wine, butter.", dietaryRestrictions: ["Shellfish", "Dairy", "Gluten"], price: "$36" },
   { id: "pasta-puttanesca", name: "Pasta Puttanesca", category: "Pastas", description: "Daily catch, shrimp, mussels, Manila clams, anchovies, Castelvetrano olives, capers, San Marzano tomato sauce over linguini.", dietaryRestrictions: ["Fish", "Shellfish", "Gluten", "Anchovy"], price: "$42" },
   { id: "pappardelle-bolognese", name: "Scoma's Pappardelle Bolognese", category: "Pastas", description: "Traditional Italian tomato meat sauce.", dietaryRestrictions: ["Beef", "Pork", "Gluten", "Dairy"], price: "$29" },
   { id: "winter-risotto", name: "Winter Vegetable Risotto", category: "Pastas", description: "Toasted pepitas, pomegranate seeds, Reggiano Parmigiano.", dietaryRestrictions: ["veg", "gf", "Dairy"], price: "$32" },

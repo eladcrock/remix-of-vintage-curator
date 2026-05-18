@@ -1,5 +1,5 @@
 /**
- * About Scoma's — story, history timeline, awards, press, philosophy, media.
+ * About Scoma's, story, history timeline, awards, press, philosophy, media.
  * Data lives in src/data/story.ts (hand-edit to update or add images).
  */
 import { createFileRoute } from "@tanstack/react-router";
@@ -21,7 +21,7 @@ export const Route = createFileRoute("/about")({
       {
         name: "description",
         content:
-          "Sixty years on Pier 47 — Scoma's history, philosophy, awards, and press. Sourced from scomas.com, SF Chronicle, Newsweek, GGRA Saucy Awards, and SF Legacy Business Registry.",
+          "Sixty years on Pier 47, Scoma's history, philosophy, awards, and press. Sourced from scomas.com, SF Chronicle, Newsweek, GGRA Saucy Awards, and SF Legacy Business Registry.",
       },
       { property: "og:title", content: "Scoma's Pro · About Scoma's" },
       {
@@ -151,7 +151,7 @@ function AboutPage() {
                   &ldquo;{p.quote}&rdquo;
                 </p>
                 <footer className="mt-2 text-[10px] uppercase tracking-wider text-muted-foreground">
-                  — {p.outlet}
+, {p.outlet}
                   {p.context ? ` · ${p.context}` : ""}
                 </footer>
               </blockquote>

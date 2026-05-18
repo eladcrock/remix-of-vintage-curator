@@ -24,7 +24,7 @@ const SOURCING: SourcePin[] = [
     x: 28,
     y: 12,
     species: ["Halibut", "Wild King Salmon", "Black Cod / Sablefish", "Spot Prawns"],
-    note: "Cold, clean Gulf of Alaska waters — line-caught halibut and troll-caught king salmon arrive whole on ice.",
+    note: "Cold, clean Gulf of Alaska waters, line-caught halibut and troll-caught king salmon arrive whole on ice.",
   },
   {
     id: "bc",
@@ -32,7 +32,7 @@ const SOURCING: SourcePin[] = [
     x: 38,
     y: 28,
     species: ["Sablefish", "Spot Prawns", "Wild Salmon"],
-    note: "Pacific Northwest fjords. Trap-caught sablefish & prawns — gear that leaves the seabed untouched.",
+    note: "Pacific Northwest fjords. Trap-caught sablefish & prawns, gear that leaves the seabed untouched.",
   },
   {
     id: "wa-or",
@@ -64,7 +64,7 @@ const SOURCING: SourcePin[] = [
     x: 50,
     y: 70,
     species: ["Squid (Calamari)", "Sardines", "Rockfish"],
-    note: "Cold upwelling waters — California market squid and rockfish from the Monterey fleet.",
+    note: "Cold upwelling waters, California market squid and rockfish from the Monterey fleet.",
   },
   {
     id: "socal",
@@ -82,7 +82,7 @@ const STORIES: { id: string; title: string; body: string[] }[] = [
     title: "The Mr. Morgan & Steve Fitz",
     body: [
       "Fisherman Steve Fitz has been selling Scoma's the freshest sand dabs and petrale sole for nearly 35 years. His boat, the F/V Mr. Morgan, docks right next to the restaurant on Pier 47.",
-      "Most mornings the catch travels just a few dozen feet — off the deck of the Mr. Morgan, across the pier, and into Scoma's kitchen. That is the literal definition of 'pier to plate'.",
+      "Most mornings the catch travels just a few dozen feet, off the deck of the Mr. Morgan, across the pier, and into Scoma's kitchen. That is the literal definition of 'pier to plate'.",
       "Steve is part of the California Groundfish Collective, a small group of West Coast fishermen committed to careful, accountable harvest of California's bottom-fish species.",
     ],
   },
@@ -90,7 +90,7 @@ const STORIES: { id: string; title: string; body: string[] }[] = [
     id: "scottish-seine",
     title: "Low-impact fishing: Scottish seine, not bottom trawl",
     body: [
-      "The Mr. Morgan fishes with a 'Scottish seine' (also called a Danish seine) — a method that uses light ropes laid in a wide circle on the seabed and slowly drawn together. Fish are corralled into a small net at the center.",
+      "The Mr. Morgan fishes with a 'Scottish seine' (also called a Danish seine), a method that uses light ropes laid in a wide circle on the seabed and slowly drawn together. Fish are corralled into a small net at the center.",
       "Unlike conventional bottom trawls, the gear does not drag heavy doors or chains across the bottom. Bycatch is dramatically reduced and the seafloor habitat is left essentially undisturbed.",
       "It's slower and more skill-dependent than trawling, which is exactly why so few boats still do it. The trade-off shows up on the plate: cleaner, less bruised, more delicate fish.",
     ],
@@ -99,19 +99,19 @@ const STORIES: { id: string; title: string; body: string[] }[] = [
     id: "sand-dabs",
     title: "Why sand dabs are a San Francisco delicacy",
     body: [
-      "Pacific sand dabs are a small left-eyed flatfish native to the California coast. They are sweet, delicate, and almost impossible to find outside the Bay Area — they don't ship or freeze well.",
+      "Pacific sand dabs are a small left-eyed flatfish native to the California coast. They are sweet, delicate, and almost impossible to find outside the Bay Area, they don't ship or freeze well.",
       "At Scoma's they come in whole from the Mr. Morgan, are filleted in-house, and pan-finished simply with butter, lemon and capers so the fish itself does the talking.",
-      "Sand dabs are managed under the federal Pacific Groundfish Plan and rated a 'Best Choice' by Monterey Bay Aquarium Seafood Watch when caught with low-impact gear — exactly the gear Steve uses.",
+      "Sand dabs are managed under the federal Pacific Groundfish Plan and rated a 'Best Choice' by Monterey Bay Aquarium Seafood Watch when caught with low-impact gear, exactly the gear Steve uses.",
     ],
   },
   {
     id: "scomas-history",
-    title: "Scoma's & Fisherman's Wharf — since 1965",
+    title: "Scoma's & Fisherman's Wharf, since 1965",
     body: [
       "In 1965, brothers Al and Joe Scoma bought a six-stool coffee shop on Pier 47, cooking their mother's recipes for the local fishermen who tied up out back.",
       "Sixty years later, Scoma's is the only restaurant on Fisherman's Wharf that still receives its catch directly from boats at its own pier. Fish is unloaded, cut, and cooked all within yards of the water.",
-      "Scoma's is a registered San Francisco Legacy Business — recognized by the city for its longstanding contribution to the cultural fabric of the Wharf.",
-      "The Lazy Man's Cioppino — Dungeness crab, scallops, shrimp, clams, mussels, calamari, and market fish in Mama Scoma's tomato broth — was born here and remains the dish most associated with the Wharf.",
+      "Scoma's is a registered San Francisco Legacy Business, recognized by the city for its longstanding contribution to the cultural fabric of the Wharf.",
+      "The Lazy Man's Cioppino, Dungeness crab, scallops, shrimp, clams, mussels, calamari, and market fish in Mama Scoma's tomato broth, was born here and remains the dish most associated with the Wharf.",
     ],
   },
 ];
@@ -130,7 +130,7 @@ export function PierToPlate() {
       <section className="rounded-lg border border-border bg-card p-4">
         <h3 className="text-sm font-semibold">Where our fish comes from</h3>
         <p className="mt-1 text-[11px] text-muted-foreground">
-          A schematic of the Pacific coast — tap a pin in the list to see what
+          A schematic of the Pacific coast, tap a pin in the list to see what
           arrives from each region.
         </p>
 

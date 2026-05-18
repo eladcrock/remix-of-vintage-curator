@@ -1,5 +1,5 @@
 /**
- * Experience curator — types + helpers for AI tasting menu generation.
+ * Experience curator, types + helpers for AI tasting menu generation.
  *
  * Data:
  *   - System prompt + tunables: src/data/experiences.ts
@@ -9,9 +9,9 @@
  *   - src/routes/api/curate.ts (POST) calls Lovable AI Gateway.
  *
  * Frontend:
- *   - src/routes/experiences.tsx — page
- *   - src/components/CuratorForm.tsx — inputs
- *   - src/components/MenuOptionCard.tsx — one menu option
+ *   - src/routes/experiences.tsx, page
+ *   - src/components/CuratorForm.tsx, inputs
+ *   - src/components/MenuOptionCard.tsx, one menu option
  */
 import { ALL_DISHES, type Dish, type FoodCategory } from "@/lib/food";
 
@@ -51,14 +51,14 @@ export type AddOn = {
   /** Course the add-on rides on. "Any" displays it at the bottom of the menu. */
   course: FoodCategory | "Any";
   /**
-   * "upgrade"  — layered on top of an existing course (no course is dropped).
-   * "course"   — replaces (or fulfills) the course at that category with this
+   * "upgrade", layered on top of an existing course (no course is dropped).
+   * "course", replaces (or fulfills) the course at that category with this
    *              item at the user-entered price. Not valid with course="Any".
    */
   kind: "upgrade" | "course";
   /**
-   * "person" — price is per guest.
-   * "table"  — flat price for the table; per-person impact = price / guests.
+   * "person", price is per guest.
+   * "table", flat price for the table; per-person impact = price / guests.
    */
   scope: "person" | "table";
 };
@@ -100,7 +100,7 @@ export function priceToNumber(price: string): number {
 
 /**
  * Slim dish projection sent to the model. We deliberately omit
- * preparation/ingredients to keep prompt small — restrictions + description
+ * preparation/ingredients to keep prompt small, restrictions + description
  * are enough for menu curation.
  */
 export type DishCatalogEntry = {

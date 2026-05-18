@@ -3,8 +3,8 @@
  *
  * Given a budget range, guest count, and restrictions, returns 2 distinct
  * chef's menus drawn from src/data/food.ts:
- *   - "Trattoria Classica"  — traditional, balanced
- *   - "Indulgente"          — premium proteins, richer
+ *   - "Trattoria Classica", traditional, balanced
+ *   - "Indulgente", premium proteins, richer
  *
  * Tunables (course flow, drop order, restriction keywords, premium ids)
  * live in src/data/experiences.ts.
@@ -106,8 +106,8 @@ type Pick = { cat: FoodCategory; dish: Candidate; reasoning: string };
  * target price-per-course that lands the total inside the budget.
  *
  * style:
- *   "classica"   — prefer non-premium, mid-priced picks
- *   "indulgente" — prefer premium, upper-priced picks
+ *   "classica", prefer non-premium, mid-priced picks
+ *   "indulgente", prefer premium, upper-priced picks
  */
 function buildMenu(
   flow: FoodCategory[],
@@ -117,7 +117,7 @@ function buildMenu(
   style: "classica" | "indulgente",
   exclude: Set<string>,
 ): Pick[] | null {
-  // Aim near the upper portion of the range — give the guest value.
+  // Aim near the upper portion of the range, give the guest value.
   const target = style === "indulgente"
     ? budgetMin + (budgetMax - budgetMin) * 0.85
     : budgetMin + (budgetMax - budgetMin) * 0.55;
@@ -194,7 +194,7 @@ function buildMenu(
 
 function reasoningFor(cat: FoodCategory, dish: Candidate, style: "classica" | "indulgente"): string {
   if (style === "indulgente" && dish._premium) {
-    return `Premium ${cat.toLowerCase()} pick — a centerpiece dish.`;
+    return `Premium ${cat.toLowerCase()} pick, a centerpiece dish.`;
   }
   if (style === "classica") {
     return `Approachable ${cat.toLowerCase()}, balances the progression.`;
@@ -230,7 +230,7 @@ function picksToOption(
         dishId: `addon:${rep.name}`,
         dishName: rep.scope === "table" ? `${rep.name} (table)` : rep.name,
         price: Math.round(pp * 100) / 100,
-        reasoning: `Guest request — ${rep.name} as the ${p.cat.toLowerCase()}${
+        reasoning: `Guest request, ${rep.name} as the ${p.cat.toLowerCase()}${
           rep.scope === "table" ? ` ($${rep.price} for the table)` : ""
         }.`,
       };
@@ -311,7 +311,7 @@ export function curateMenus(
   );
   if (cheapest > req.budgetMax) {
     return {
-      error: `Budget too low — the lightest possible menu under these restrictions is $${cheapest}/person.`,
+      error: `Budget too low, the lightest possible menu under these restrictions is $${cheapest}/person.`,
     };
   }
 
@@ -319,7 +319,7 @@ export function curateMenus(
   const classica = buildMenu(flow, byCat, req.budgetMin, req.budgetMax, "classica", new Set());
   if (!classica) return { error: "Could not assemble a Classica menu within budget." };
 
-  // Indulgente — exclude classica's picks so the two menus differ.
+  // Indulgente, exclude classica's picks so the two menus differ.
   const excludeForDiff = new Set(classica.map((p) => p.dish.id));
   let indulgente =
     buildMenu(flow, byCat, req.budgetMin, req.budgetMax, "indulgente", excludeForDiff) ??
@@ -340,7 +340,7 @@ export function curateMenus(
       ),
       picksToOption(
         "Captain's Catch",
-        "Premium seafood and richer builds — a celebratory progression.",
+        "Premium seafood and richer builds, a celebratory progression.",
         indulgente,
         req.guests,
         req,

@@ -5,7 +5,7 @@
  * Display lives in `src/components/DishCard.tsx`.
  * Page route lives in `src/routes/food.tsx`.
  *
- * preparation / ingredients are OPTIONAL — Scoma's publishes menu
+ * preparation / ingredients are OPTIONAL, Scoma's publishes menu
  * descriptions only, not full kitchen specs.
  */
 
@@ -39,7 +39,7 @@ export type Dish = {
   name: string;
   category: FoodCategory;
   description: string;
-  /** Optional — Scoma's menu doesn't publish prep notes. */
+  /** Optional, Scoma's menu doesn't publish prep notes. */
   preparation?: string;
   /** Optional sub-recipes. */
   ingredients?: IngredientNote[];
