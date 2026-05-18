@@ -10,6 +10,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { SiteNav } from "@/components/SiteNav";
 import { RegionMap } from "@/components/RegionMap";
+import { PierToPlate } from "@/components/PierToPlate";
 import { CLASSES, REGIONS, type Country, type Region } from "@/data/education";
 import { winesForRegion, zoneColor } from "@/lib/education";
 import type { Wine } from "@/lib/wines";
