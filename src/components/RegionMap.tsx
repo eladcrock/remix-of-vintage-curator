@@ -261,9 +261,13 @@ export function RegionMap({
 
       {/* Sea / canvas — always bright so labels read in light & dark mode */}
         <rect x="-10" y="-10" width="120" height="120" fill="url(#seaGrad)" />
-      {country === "Italy"
-        ? <ItalyShape fill="oklch(0.985 0.01 95)" stroke="oklch(0.30 0.05 250)" />
-        : <FranceShape fill="oklch(0.985 0.01 95)" stroke="oklch(0.30 0.05 250)" />}
+      {country === "Italy" ? (
+        <ItalyShape fill="oklch(0.985 0.01 95)" stroke="oklch(0.30 0.05 250)" />
+      ) : country === "France" ? (
+        <FranceShape fill="oklch(0.985 0.01 95)" stroke="oklch(0.30 0.05 250)" />
+      ) : (
+        <CaliforniaShape fill="oklch(0.985 0.01 95)" stroke="oklch(0.30 0.05 250)" />
+      )}
 
       {items.map((r) => {
         const active = r.id === selectedId;
