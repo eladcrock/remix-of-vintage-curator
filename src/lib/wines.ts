@@ -9,7 +9,7 @@ export type Wine = {
   varietal: string | null;
   region: string | null;
   country: string | null;
-  type: "Sparkling" | "White" | "Red" | "Rosé" | "Orange" | "Dessert" | "Other";
+  type: "Sparkling" | "White" | "Red" | "Rosé" | "Dessert" | "Other";
   priceGlass: number | null;
   priceBottle: number | null;
   size: string | null;
@@ -23,7 +23,6 @@ export const WINE_TYPES = [
   "Sparkling",
   "White",
   "Rosé",
-  "Orange",
   "Red",
   "Dessert",
 ] as const;
