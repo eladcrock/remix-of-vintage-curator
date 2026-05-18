@@ -67,6 +67,7 @@ function wineName(w: Wine): string {
 }
 
 function EducationPage() {
+  const [topTab, setTopTab] = useState<"pier" | "wine">("pier");
   const [country, setCountry] = useState<Country>("Italy");
   const [query, setQuery] = useState("");
   const [openId, setOpenId] = useState<string | null>(null);
