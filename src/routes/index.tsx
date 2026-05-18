@@ -216,7 +216,7 @@ function Index() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SiteNav
-        title="Bottega Pro"
+        title="Scoma's Pro"
         subtitle={`Wine list 03.15.2026 · ${ALL_WINES.length} wines`}
       />
 

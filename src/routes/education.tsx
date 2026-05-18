@@ -19,9 +19,9 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 export const Route = createFileRoute("/education")({
   head: () => ({
     meta: [
-      { title: "Bottega Pro · Education" },
-      { name: "description", content: "Region-coded wine mindmap — Bottega Wine Class #1–#5, cross-referenced with our list." },
-      { property: "og:title", content: "Bottega Pro · Education" },
+      { title: "Scoma's Pro · Education" },
+      { name: "description", content: "Region-coded wine mindmap — Scoma's Wine Class #1–#5, cross-referenced with our list." },
+      { property: "og:title", content: "Scoma's Pro · Education" },
       { property: "og:description", content: "Where knowledge meets service — a region-coded wine mindmap." },
     ],
   }),
@@ -116,12 +116,12 @@ function EducationPage() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <SiteNav title="Bottega Pro" subtitle="Education" />
+      <SiteNav title="Scoma's Pro" subtitle="Education" />
       <main className="mx-auto max-w-6xl px-4 py-5">
         <div className="mb-4">
           <h2 className="text-lg font-semibold">Wine atlas &amp; study guide</h2>
           <p className="text-xs text-muted-foreground">
-            Bottega Wine Class #1–#5, mapped. Tap a region on the map or in the list to read terroir, history, grapes, and the bottles we pour.
+            Scoma's Wine Class #1–#5, mapped. Tap a region on the map or in the list to read terroir, history, grapes, and the bottles we pour.
           </p>
         </div>
 

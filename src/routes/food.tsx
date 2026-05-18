@@ -59,7 +59,7 @@ function FoodPage() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SiteNav
-        title="Bottega Pro · Food"
+        title="Scoma's Pro · Food"
         subtitle={`${ALL_DISHES.length} dishes`}
       />
       <main className="mx-auto max-w-3xl px-4 pb-24 pt-4">
