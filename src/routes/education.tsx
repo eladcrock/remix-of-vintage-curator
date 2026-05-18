@@ -210,43 +210,6 @@ function EducationPage() {
                 ))}
               </ul>
             </div>
-
-            <div className="rounded-lg border border-border bg-card p-3">
-              <h3 className="mb-2 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">Wine classes</h3>
-              <ul className="space-y-1">
-                {CLASSES.map((c) => (
-                  <li key={c.id}>
-                    <button
-                      onClick={() => setOpenClassId((p) => (p === c.id ? null : c.id))}
-                      className="flex w-full items-center justify-between gap-2 rounded px-2 py-1.5 text-left text-[11px] hover:bg-muted/40 transition-colors"
-                      aria-expanded={openClassId === c.id}
-                    >
-                      <span className="font-medium">{c.title}</span>
-                      <span aria-hidden className="text-muted-foreground">{openClassId === c.id ? "−" : "+"}</span>
-                    </button>
-                    {openClassId === c.id && (
-                      <div className="px-2 pb-2 text-[11px] text-muted-foreground space-y-1.5">
-                        <p>{c.blurb}</p>
-                        <div className="flex flex-wrap gap-1.5 pt-0.5">
-                          <button
-                            onClick={() => { setClassFilter(c.id); setOpenClassId(null); }}
-                            className="inline-block rounded-full border border-border px-2 py-0.5 text-[10px] font-medium hover:bg-muted/60"
-                          >
-                            Filter regions →
-                          </button>
-                          <button
-                            onClick={() => setReadClassId(c.id)}
-                            className="inline-block rounded-full bg-primary px-2 py-0.5 text-[10px] font-semibold text-primary-foreground hover:opacity-90"
-                          >
-                            Read full class
-                          </button>
-                        </div>
-                      </div>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            </div>
           </aside>
 
           {/* Mindmap: zones → regions */}
