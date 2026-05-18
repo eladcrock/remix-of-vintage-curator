@@ -6,7 +6,7 @@ const TYPE_COLORS: Record<Wine["type"], string> = {
   White: "bg-[oklch(0.32_0.04_95)] text-[oklch(0.96_0.02_95)]",
   Sparkling: "bg-[oklch(0.32_0.05_80)] text-[oklch(0.96_0.02_85)]",
   Rosé: "bg-[oklch(0.32_0.06_15)] text-[oklch(0.96_0.02_20)]",
-  Orange: "bg-[oklch(0.32_0.08_60)] text-[oklch(0.96_0.02_60)]",
+  
   Dessert: "bg-[oklch(0.32_0.06_50)] text-[oklch(0.96_0.02_55)]",
   Other: "bg-muted text-muted-foreground",
 };
