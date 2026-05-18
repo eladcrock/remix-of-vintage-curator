@@ -123,7 +123,87 @@ const STORIES: { id: string; title: string; body: string[] }[] = [
   },
 ];
 
-export function PierToPlate() {
+type OysterPin = {
+  id: string;
+  /** label drawn on the map */
+  short: string;
+  /** % x/y on a simplified world rectangle */
+  x: number;
+  y: number;
+};
+
+const OYSTER_PINS: OysterPin[] = [
+  { id: "bc", short: "BC", x: 14, y: 30 },
+  { id: "hood", short: "Hood Canal", x: 13, y: 35 },
+  { id: "tomales", short: "Tomales", x: 14, y: 44 },
+  { id: "humboldt", short: "Humboldt", x: 13, y: 41 },
+  { id: "ne", short: "New England", x: 30, y: 38 },
+  { id: "chesapeake", short: "Chesapeake", x: 29, y: 44 },
+  { id: "gulf", short: "Gulf", x: 25, y: 52 },
+  { id: "france", short: "France", x: 47, y: 36 },
+  { id: "ireland", short: "Ireland", x: 45, y: 32 },
+  { id: "japan", short: "Japan", x: 82, y: 42 },
+];
+
+type OysterFamily = {
+  id: string;
+  species: string; // latin
+  name: string;
+  origin: string;
+  flavor: string;
+  examples: string[];
+  regions: string[]; // pin ids
+};
+
+const OYSTER_FAMILIES: OysterFamily[] = [
+  {
+    id: "pacific",
+    species: "Crassostrea gigas",
+    name: "Pacific (Miyagi)",
+    origin: "Native to Japan; now the dominant farmed oyster on the U.S. West Coast.",
+    flavor: "Plump, creamy body with cucumber and melon notes; salinity varies by bay.",
+    examples: ["Kusshi (BC)", "Fanny Bay (BC)", "Hama Hama (Hood Canal)", "Totten Inlet (WA)"],
+    regions: ["bc", "hood", "tomales"],
+  },
+  {
+    id: "kumamoto",
+    species: "Crassostrea sikamea",
+    name: "Kumamoto",
+    origin: "Originally from Kyushu, Japan; rescued from near-extinction by PNW farms.",
+    flavor: "Small, deep-cupped, sweet with a honeydew finish and very mild brine.",
+    examples: ["Humboldt Kumamoto (CA)", "Taylor Kumamoto (WA)"],
+    regions: ["humboldt", "hood", "japan"],
+  },
+  {
+    id: "virginica",
+    species: "Crassostrea virginica",
+    name: "Eastern / Atlantic",
+    origin: "Native from the Gulf of Mexico up through the Canadian Maritimes.",
+    flavor: "Firmer meat, brinier, often a clean mineral finish; flavor swings widely by estuary.",
+    examples: ["Blue Point (NY)", "Wellfleet (MA)", "Beausoleil (NB)", "Malpeque (PEI)"],
+    regions: ["ne", "chesapeake", "gulf"],
+  },
+  {
+    id: "edulis",
+    species: "Ostrea edulis",
+    name: "European Flat (Belon)",
+    origin: "Native to Europe; small populations cultivated in Maine.",
+    flavor: "Flat, coin-shaped shell; intensely metallic, coppery, almost hazelnut finish.",
+    examples: ["Belon (France)", "Galway Flat (Ireland)"],
+    regions: ["france", "ireland"],
+  },
+  {
+    id: "lurida",
+    species: "Ostrea lurida",
+    name: "Olympia",
+    origin: "The only oyster native to the West Coast of North America.",
+    flavor: "Tiny (often quarter-sized), strong celery-salt and copper finish.",
+    examples: ["Olympia (Puget Sound)"],
+    regions: ["hood"],
+  },
+];
+
+
   return (
     <div className="space-y-6">
       <header className="rounded-lg border border-border bg-card p-4">
