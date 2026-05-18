@@ -216,7 +216,7 @@ function Index() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SiteNav
-        title="Bottega Pro"
+        title="Scoma's Pro"
         subtitle={`Wine list 03.15.2026 · ${ALL_WINES.length} wines`}
       />
 
@@ -320,7 +320,6 @@ function Index() {
             {([
               ["all", "All sizes"],
               ["standard", "Standard 750mL"],
-              ["large", "Large format 1.5L+"],
               ["half", "Half 375mL"],
             ] as [FormatFilter, string][]).map(([key, label]) => {
               const active = state.format === key;

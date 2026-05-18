@@ -45,7 +45,7 @@ export function wineEmoji(w: Wine): string {
     case "Rosé": return "🌸";
     case "Red": return "🍷";
     case "Dessert": return "🍯";
-    case "Orange": return "🟠";
+    
     default: return "🍾";
   }
 }

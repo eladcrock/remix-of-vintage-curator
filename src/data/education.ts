@@ -1,5 +1,5 @@
 /**
- * Wine education data - sourced from Bottega Wine Class #1-#5 documentation.
+ * Wine education data - sourced from Scoma's Wine Class #1-#5 documentation.
  * Each region has approximate (x, y) coordinates within a normalized 100x140
  * viewBox for its country's stylized SVG map.
  */

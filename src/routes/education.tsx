@@ -10,6 +10,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { SiteNav } from "@/components/SiteNav";
 import { RegionMap } from "@/components/RegionMap";
+import { PierToPlate } from "@/components/PierToPlate";
 import { CLASSES, REGIONS, type Country, type Region } from "@/data/education";
 import { winesForRegion, zoneColor } from "@/lib/education";
 import type { Wine } from "@/lib/wines";
@@ -19,9 +20,9 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 export const Route = createFileRoute("/education")({
   head: () => ({
     meta: [
-      { title: "Bottega Pro · Education" },
-      { name: "description", content: "Region-coded wine mindmap — Bottega Wine Class #1–#5, cross-referenced with our list." },
-      { property: "og:title", content: "Bottega Pro · Education" },
+      { title: "Scoma's Pro · Education" },
+      { name: "description", content: "Region-coded wine mindmap — Scoma's Wine Class #1–#5, cross-referenced with our list." },
+      { property: "og:title", content: "Scoma's Pro · Education" },
       { property: "og:description", content: "Where knowledge meets service — a region-coded wine mindmap." },
     ],
   }),
@@ -38,7 +39,7 @@ const TYPE_STYLE: Record<string, { bar: string; chip: string; label: string }> =
   White:     { bar: "oklch(0.80 0.12 70)",  chip: "bg-[oklch(0.92_0.09_70)] text-[oklch(0.32_0.08_55)]", label: "White" },
   Sparkling: { bar: "oklch(0.85 0.08 70)",  chip: "bg-[oklch(0.95_0.06_70)] text-[oklch(0.32_0.08_55)]", label: "Sparkling" },
   Rosé:      { bar: "oklch(0.78 0.12 15)",  chip: "bg-[oklch(0.90_0.08_15)] text-[oklch(0.35_0.10_15)]", label: "Rosé" },
-  Orange:    { bar: "oklch(0.70 0.16 60)",  chip: "bg-[oklch(0.88_0.10_60)] text-[oklch(0.35_0.10_50)]", label: "Orange" },
+  
   Dessert:   { bar: "oklch(0.70 0.14 85)",  chip: "bg-[oklch(0.90_0.10_85)] text-[oklch(0.35_0.08_70)]", label: "Dessert" },
 };
 const DEFAULT_TYPE = { bar: "oklch(0.6 0 0)", chip: "bg-muted text-foreground", label: "—" };
@@ -66,6 +67,7 @@ function wineName(w: Wine): string {
 }
 
 function EducationPage() {
+  const [topTab, setTopTab] = useState<"pier" | "wine">("pier");
   const [country, setCountry] = useState<Country>("Italy");
   const [query, setQuery] = useState("");
   const [openId, setOpenId] = useState<string | null>(null);
@@ -116,14 +118,40 @@ function EducationPage() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <SiteNav title="Bottega Pro" subtitle="Education" />
+      <SiteNav title="Scoma's Pro" subtitle="Education" />
       <main className="mx-auto max-w-6xl px-4 py-5">
-        <div className="mb-4">
-          <h2 className="text-lg font-semibold">Wine atlas &amp; study guide</h2>
-          <p className="text-xs text-muted-foreground">
-            Bottega Wine Class #1–#5, mapped. Tap a region on the map or in the list to read terroir, history, grapes, and the bottles we pour.
-          </p>
+        <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+          <div>
+            <h2 className="text-lg font-semibold">
+              {topTab === "pier" ? "Pier to Plate" : "Wine atlas & study guide"}
+            </h2>
+            <p className="text-xs text-muted-foreground">
+              {topTab === "pier"
+                ? "Where Scoma's seafood comes from — sourcing, fishermen, sustainability, and 60 years on the Wharf."
+                : "Scoma's Wine Class #1–#5, mapped. Tap a region on the map or in the list to read terroir, history, grapes, and the bottles we pour."}
+            </p>
+          </div>
+          <div className="flex gap-1 rounded-md border border-border p-1">
+            {(["pier", "wine"] as const).map((t) => (
+              <button
+                key={t}
+                onClick={() => setTopTab(t)}
+                className={`rounded px-3 py-1 text-xs font-medium transition-colors ${
+                  topTab === t
+                    ? "bg-primary text-primary-foreground"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                {t === "pier" ? "Pier to Plate" : "Wine Atlas"}
+              </button>
+            ))}
+          </div>
         </div>
+
+        {topTab === "pier" ? (
+          <PierToPlate />
+        ) : (
+        <>
 
         {/* Country tabs + search */}
         <div className="mb-3 flex flex-wrap items-center gap-2">
@@ -281,6 +309,8 @@ function EducationPage() {
             })}
           </section>
         </div>
+        </>
+        )}
       </main>
       <ClassReadDialog classId={readClassId} onClose={() => setReadClassId(null)} />
     </div>

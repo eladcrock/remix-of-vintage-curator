@@ -1,6 +1,6 @@
-# Bottega · Sommelier Quick List
+# Scoma's · Sommelier Quick List
 
-A pocket-friendly, dark-theme search of the Bottega wine list. Filter by **vintage**,
+A pocket-friendly, dark-theme search of the Scoma's wine list. Filter by **vintage**,
 **type / varietal**, **price**, and free text. Built so Cocktails, Food, and Custom
 Experiences slot in later without rework.
 
