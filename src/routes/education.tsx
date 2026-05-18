@@ -151,7 +151,7 @@ function EducationPage() {
         {/* Country tabs + search */}
         <div className="mb-3 flex flex-wrap items-center gap-2">
           <div className="flex gap-1 rounded-md border border-border p-1">
-            {(["Italy", "France"] as Country[]).map((c) => (
+            {(["Italy", "France", "California"] as Country[]).map((c) => (
               <button
                 key={c}
                 onClick={() => setCountry(c)}
