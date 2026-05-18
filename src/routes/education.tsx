@@ -120,12 +120,38 @@ function EducationPage() {
     <div className="min-h-screen bg-background text-foreground">
       <SiteNav title="Scoma's Pro" subtitle="Education" />
       <main className="mx-auto max-w-6xl px-4 py-5">
-        <div className="mb-4">
-          <h2 className="text-lg font-semibold">Wine atlas &amp; study guide</h2>
-          <p className="text-xs text-muted-foreground">
-            Scoma's Wine Class #1–#5, mapped. Tap a region on the map or in the list to read terroir, history, grapes, and the bottles we pour.
-          </p>
+        <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+          <div>
+            <h2 className="text-lg font-semibold">
+              {topTab === "pier" ? "Pier to Plate" : "Wine atlas & study guide"}
+            </h2>
+            <p className="text-xs text-muted-foreground">
+              {topTab === "pier"
+                ? "Where Scoma's seafood comes from — sourcing, fishermen, sustainability, and 60 years on the Wharf."
+                : "Scoma's Wine Class #1–#5, mapped. Tap a region on the map or in the list to read terroir, history, grapes, and the bottles we pour."}
+            </p>
+          </div>
+          <div className="flex gap-1 rounded-md border border-border p-1">
+            {(["pier", "wine"] as const).map((t) => (
+              <button
+                key={t}
+                onClick={() => setTopTab(t)}
+                className={`rounded px-3 py-1 text-xs font-medium transition-colors ${
+                  topTab === t
+                    ? "bg-primary text-primary-foreground"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                {t === "pier" ? "Pier to Plate" : "Wine Atlas"}
+              </button>
+            ))}
+          </div>
         </div>
+
+        {topTab === "pier" ? (
+          <PierToPlate />
+        ) : (
+        <>
 
         {/* Country tabs + search */}
         <div className="mb-3 flex flex-wrap items-center gap-2">
