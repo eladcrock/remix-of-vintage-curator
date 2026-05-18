@@ -1,79 +1,66 @@
-## Experience Curator — AI Tasting Menu Generator
+## Rebuild for Scoma's San Francisco
 
-A new `/experiences` tab where the professional enters guests, per-person budget (single number or range), and table notes (allergies, vegetarians, "no red meat", etc.). Lovable AI returns **2 chef's menus** following the classic 5-course Italian flow, drawn from the dishes already in `src/data/food.ts`, scored against the menu prices as-is.
+Repurpose the app from Bottega (Napa) to **Scoma's** — the historic seafood restaurant on Fisherman's Wharf. Replace all content data, keep the existing architecture (Wines / Bar / Food / Experiences / Education tabs, AI curator, search, filters).
 
-### File structure (matches existing conventions)
+### Research phase (online sources)
+
+I'll pull from Scoma's official site (scomas.com), their published PDF menus, and reputable San Francisco history sources:
+
+1. **Wines** — Scoma's wine list (by-the-glass + bottles, white/red/sparkling/rosé, vintages, prices).
+2. **Food menu** — appetizers, salads/soups, pasta, seafood entrées, sides, desserts. Menu descriptions only (no ingredient/prep deep-dive — they don't publish that).
+3. **Bar program** — house cocktails, mocktails, beer list. Replaces the current Bottega cocktails entirely.
+4. **Education content** — pulled from web research:
+   - **Fish & seafood** species Scoma's serves (Dungeness crab, petrale sole, salmon, etc.) — seasonality, how to talk about them
+   - **Sustainability** — Scoma's "Pier-to-Plate" program (own fish-receiving station on Pier 47, the only restaurant with one), Monterey Bay Aquarium Seafood Watch alignment
+   - **Fisherman's Wharf history** — Italian-immigrant fishing community, Pier 47, the fleet
+   - **Scoma's history** — founded 1965 by Al & Joe Scoma, evolution from coffee shop to landmark
+
+### Data file changes
 
 ```
-src/lib/experiences.ts          Types: ExperienceRequest, MenuOption, Course
-                                Helpers: parseBudgetRange, dishesAsCatalog,
-                                priceToNumber, validateMenu
-src/data/experiences.ts         System prompt + curator instructions
-                                (hand-editable tuning knobs)
-src/routes/api/curate.ts        TanStack server route — POST. Calls Lovable
-                                AI Gateway with structured Output schema.
-src/components/CuratorForm.tsx  Inputs: guests, budget min/max, notes textarea,
-                                quick-toggle chips (Gluten-free, Vegetarian,
-                                No pork, No shellfish, No red meat)
-src/components/MenuOptionCard.tsx  Renders one of two menu options:
-                                course-by-course, per-person total, total
-                                for table, chef's rationale, allergen flags
-src/routes/experiences.tsx      Page: form on top, two MenuOptionCards below,
-                                loading + error states
+src/data/wines.json         Replace with Scoma's wine list
+src/data/food.ts            Replace with Scoma's menu (menuDescription only;
+                            leave preparation/ingredients empty or remove)
+src/data/cocktails.ts       Replace with Scoma's cocktails + mocktails + beer
+src/data/education.ts       Replace with fish/sustainability/history modules
+src/data/experiences.ts     Re-tune AI curator prompt for Scoma's flow
+                            (seafood-forward, not 5-course Italian)
 ```
 
-Also: enable the Experiences link in `src/components/SiteNav.tsx` and register the new routes (`/experiences`, `/api/curate`).
+### Schema adjustments
 
-### Data flow
+- **Food**: Scoma's doesn't publish ingredient/prep details. Make `preparation` and `ingredients` optional in the `Dish` type and hide those sections in `DishCard` when empty. Categories shift to Scoma's actual menu structure: **Appetizers, Soups & Salads, Pasta, From the Sea (entrées), Sides, Dessert**.
+- **Cocktails**: Add a `kind` field (`"cocktail" | "mocktail" | "beer"`) so the Bar Program tab can group them. Beer entries skip `aLaMinute`/`batched`/`ingredients` and just show name + style + price.
 
-1. User fills form → POSTs `{ guests, budgetMin, budgetMax, notes, restrictions[] }` to `/api/curate`.
-2. Server builds a compact catalog from `ALL_DISHES` (id, name, category, price→number, dietaryRestrictions, short description) — no need to send `preparation`/`ingredients` to the model.
-3. Server calls Lovable AI (`google/gemini-3-flash-preview`) via the gateway helper with `Output.object` returning:
+### Experiences tab — adapted for Scoma's
 
-```ts
-{
-  options: [
-    {
-      title: string,                   // e.g. "Trattoria Classica"
-      style: string,                   // 1-line vibe
-      courses: [{ category, dishId, reasoning }],
-      perPersonTotal: number,
-      tableTotal: number,
-      rationale: string,               // why this menu fits budget + table
-      accommodations: string           // how restrictions were handled
-    },
-    { /* second option */ }
-  ]
-}
-```
+Current curator assumes Italian 5-course (Antipasto → Pasta → Secondo → Contorno → Dolce). Scoma's is a seafood house with a different rhythm. New flow:
 
-4. Server validates: every `dishId` exists, no dish violates a restriction, totals match real prices, per-person total is inside the budget range. If validation fails, retry once with the error fed back; otherwise return both options.
-5. Client renders both MenuOptionCards side-by-side (stacked on mobile).
+- **Default arc**: Appetizer → (optional Soup or Salad) → Pasta or Entrée (or both for indulgent) → Dessert
+- **Inference rules** in the prompt: lean into seafood; reserve premium items (whole Dungeness crab, cioppino, lobster) for the upper budget; always offer a non-seafood option when restrictions include "shellfish allergy" or "no fish"; suggest a chilled white or sparkling pairing note in the rationale (no full wine pairing yet — that's a later feature)
+- Two contrasting menu options: one **"Wharf Classic"** (traditional Scoma's hits — Dungeness, cioppino, petrale), one **"Chef's Catch"** (more adventurous or premium)
+- Update validation: categories match new Scoma's structure; required courses = Appetizer + main (entrée or pasta) + Dessert; Soup/Salad and second main are optional
 
-### Prompting rules (lives in `src/data/experiences.ts` so you can tune)
+### UI/branding touch-ups
 
-- Always follow Antipasto → Pasta → Secondo → Contorno → Dolce when budget allows. Drop Contorno first, then Secondo, if budget is tight; never drop Pasta or Dolce.
-- Reserve higher-end Secondi (steaks, Branzino, etc.) for the upper end of the budget range.
-- The two options should be meaningfully different — e.g. one "Classica" (traditional, lighter), one "Indulgente" (richer, premium proteins).
-- Honor restrictions literally. If "1 vegetarian at table of 4", flag that the Secondo needs a vegetarian sub and suggest one from the menu.
-- Stay inside the per-person budget range; prefer landing near the top of the range, not under it.
-
-### Budget input UX
-
-- Two number fields: "Budget per person" min / max. Leaving max empty = single target. Validation: min ≤ max, both > 0.
-- Display computed table total live (`min×guests`–`max×guests`).
-
-### Technical notes
-
-- Lovable AI gateway: use the `createLovableAiGatewayProvider` helper pattern with `LOVABLE_API_KEY` server-side. If the secret isn't set yet, the curate route returns a clear 500 and the UI shows "AI Gateway not enabled" — I'll trigger the enable flow on first run.
-- `priceToNumber("$24")` → 24, `"3pc $18 / 5pc $25"` → 25 (take the larger as default; configurable later).
-- No DB writes. Stateless. Each curate call is independent.
-- Surface 429 (rate limit) and 402 (credits exhausted) errors with toasts.
-- All visual styling uses existing semantic tokens from `src/styles.css` — matches the wine/bar/food tabs.
+- `SiteNav` title: "Scoma's · Server Quick Reference" (or similar)
+- `README.md` updated to reflect the new restaurant
+- Keep the existing dark theme + semantic tokens — no visual redesign
 
 ### Out of scope (flag for later)
 
-- Saving / sharing generated menus
-- Wine pairing suggestions from the wine list (natural next step — easy add)
-- Beverage cost in the budget
-- Multiple table compositions in one request
+- Wine pairing per dish (still a great next step)
+- Live menu sync from scomas.com
+- Photos of dishes
+- Allergen tags beyond what Scoma's publicly notes
+
+### How I'll execute
+
+1. Research Scoma's wine list, food menu, bar program, and history from their site + reputable sources (Firecrawl/web fetches).
+2. Generate the four data files.
+3. Adjust the `Dish` / `Cocktail` types and the two affected cards.
+4. Rewrite the curator prompt + validation for Scoma's flow.
+5. Update nav title + README.
+6. Verify in the preview that each tab renders cleanly.
+
+This is a meaningful rewrite — expect a long single turn. If you'd rather I do it in stages (e.g. wines + food first, then bar + education + experiences), say the word.
