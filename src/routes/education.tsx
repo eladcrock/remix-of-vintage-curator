@@ -70,8 +70,14 @@ function EducationPage() {
   const [country, setCountry] = useState<Country>("Italy");
   const [query, setQuery] = useState("");
   const [openId, setOpenId] = useState<string | null>(null);
-  const [onlyOnList, setOnlyOnList] = useState(true);
   const selectedId = openId;
+
+  // Only show regions actually represented on Scoma's wine list — there's no
+  // point teaching Bordeaux/Burgundy curriculum we don't pour.
+  const ON_LIST_REGIONS = useMemo(
+    () => REGIONS.filter((r) => winesForRegion(r).length > 0),
+    [],
+  );
 
   const toggle = (id: string) => {
     setOpenId((prev) => (prev === id ? null : id));
@@ -79,7 +85,6 @@ function EducationPage() {
 
   const onMapSelect = (id: string) => {
     setOpenId(id);
-    // Scroll to node
     requestAnimationFrame(() => {
       const el = document.getElementById(`region-${id}`);
       el?.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -88,8 +93,7 @@ function EducationPage() {
 
   const visibleRegions = useMemo(() => {
     const q = query.trim().toLowerCase();
-    return REGIONS.filter((r) => r.country === country).filter((r) => {
-      if (onlyOnList && winesForRegion(r).length === 0) return false;
+    return ON_LIST_REGIONS.filter((r) => r.country === country).filter((r) => {
       if (!q) return true;
       return (
         r.name.toLowerCase().includes(q) ||
@@ -98,7 +102,15 @@ function EducationPage() {
         r.grapes.some((g) => g.name.toLowerCase().includes(q) || g.notes.toLowerCase().includes(q))
       );
     });
-  }, [country, query, onlyOnList]);
+  }, [ON_LIST_REGIONS, country, query]);
+
+  // Countries that actually have wines on the list.
+  const availableCountries = useMemo(
+    () => (["Italy", "France", "California"] as Country[]).filter(
+      (c) => ON_LIST_REGIONS.some((r) => r.country === c),
+    ),
+    [ON_LIST_REGIONS],
+  );
 
   // Group by zone for the mindmap.
   const zones = useMemo(() => {
@@ -151,7 +163,7 @@ function EducationPage() {
         {/* Country tabs + search */}
         <div className="mb-3 flex flex-wrap items-center gap-2">
           <div className="flex gap-1 rounded-md border border-border p-1">
-            {(["Italy", "France", "California"] as Country[]).map((c) => (
+            {availableCountries.map((c) => (
               <button
                 key={c}
                 onClick={() => setCountry(c)}
@@ -170,15 +182,6 @@ function EducationPage() {
             placeholder="Search regions, zones, grapes…"
             className="flex-1 min-w-[180px] rounded-md border border-border bg-background px-3 py-1.5 text-sm placeholder:text-muted-foreground/60 focus:outline-none focus:ring-1 focus:ring-primary"
           />
-          <label className="flex items-center gap-1.5 rounded-md border border-border px-2 py-1.5 text-[11px] font-medium cursor-pointer select-none hover:bg-muted/40">
-            <input
-              type="checkbox"
-              checked={onlyOnList}
-              onChange={(e) => setOnlyOnList(e.target.checked)}
-              className="h-3 w-3 accent-primary"
-            />
-            On list only
-          </label>
         </div>
 
 
