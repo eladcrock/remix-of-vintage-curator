@@ -1,69 +1,74 @@
 /**
- * Curator tunables — deterministic algorithm. No AI.
+ * Scoma's Experience Curator tunables — deterministic, no AI.
  *
- * Edit these to change how the Experience Curator builds menus.
+ * Course flow tuned for a seafood-forward Fisherman's Wharf menu.
  * Logic lives in src/lib/curator.ts.
  */
 import type { FoodCategory } from "@/lib/food";
 
 /**
  * Course flow when budget allows. Earlier in the list = dropped LAST when
- * the budget is tight. (Dolci + Pasta are most protected.)
+ * budget is tight (so a Starter and a main and Dessert are protected).
  */
 export const COURSE_FLOW: FoodCategory[] = [
-  "Antipasti",
-  "Pasta",
-  "Secondi",
-  "Contorni",
-  "Dolci",
+  "Starters",
+  "Soup & Salad",
+  "Pastas",
+  "Seafood & Meat",
+  "Dessert",
 ];
 
-/** Drop order when budget is too low to fit the full flow. */
-export const DROP_ORDER: FoodCategory[] = ["Contorni", "Secondi", "Antipasti"];
+/** Drop order when the budget is too low to fit the full flow. */
+export const DROP_ORDER: FoodCategory[] = ["Soup & Salad", "Pastas"];
 
 /**
- * Dish ids tagged "premium" — reserved for the upper half of the budget
- * range, and preferred by the Indulgente menu.
+ * Premium dish ids — preferred by the "Chef's Catch" option, reserved for
+ * the upper end of the budget range. The algorithm also auto-detects
+ * premium by price (top 35% in each category).
  */
 export const PREMIUM_DISH_IDS: string[] = [
-  // Add ids of higher-end Secondi here (steaks, whole fish, etc.)
-  // The algorithm also auto-detects premium by price (top 35% in category).
+  "whole-dungeness",
+  "crab-louie",
+  "lazy-mans-cioppino",
+  "shellfish-saute-sec",
+  "alaskan-halibut",
+  "king-salmon",
+  "wagyu-bistro-filet",
+  "mixed-seafood-grill",
 ];
 
 /**
- * Keyword rules for ingredient/notes-based restrictions. Each rule maps a
- * restriction label to substrings checked against the dish's
- * description / dietaryRestrictions / name (case-insensitive).
+ * Keyword rules for restriction filtering. Each rule maps a restriction
+ * label to substrings checked against dietaryRestrictions / name /
+ * description (case-insensitive).
  */
 export const RESTRICTION_RULES: Record<string, { tags?: string[]; keywords?: string[] }> = {
   "Gluten-free": { tags: ["gluten"] },
   "Dairy-free": { tags: ["dairy"] },
   "Nut-free": { tags: ["nuts", "nut"] },
-  "No pork": { tags: ["pork"], keywords: ["prosciutto", "pancetta", "guanciale", "bacon", "salami"] },
-  "No shellfish": { tags: ["shellfish"], keywords: ["shrimp", "lobster", "crab", "scallop", "mussel", "clam", "prawn"] },
+  "No pork": { tags: ["pork"], keywords: ["pancetta", "bacon", "prosciutto", "guanciale"] },
+  "No shellfish": { tags: ["shellfish"], keywords: ["shrimp", "lobster", "crab", "scallop", "mussel", "clam", "prawn", "calamari", "oyster"] },
+  "No fish": { tags: ["fish"], keywords: ["salmon", "halibut", "snapper", "cod", "sole", "petrale", "flounder", "tuna", "anchovy", "anchovies", "branzino"] },
   "No red meat": {
-    keywords: [
-      "beef", "steak", "ribeye", "filet", "tenderloin", "wagyu",
-      "lamb", "veal", "venison", "bistecca", "tagliata", "ossobuco", "brasato",
-    ],
+    keywords: ["beef", "steak", "wagyu", "lamb", "veal", "bolognese", "burger"],
   },
   "Vegetarian": {
     keywords: [
-      "beef", "steak", "lamb", "veal", "pork", "chicken", "duck", "rabbit",
-      "fish", "salmon", "branzino", "tuna", "anchovy", "anchovies",
-      "shrimp", "lobster", "crab", "scallop", "mussel", "clam", "prawn",
-      "prosciutto", "pancetta", "guanciale", "bacon", "salami", "sausage",
+      "beef", "steak", "wagyu", "lamb", "veal", "pork", "chicken", "duck",
+      "fish", "salmon", "halibut", "snapper", "cod", "sole", "petrale", "flounder", "tuna", "anchovy", "anchovies",
+      "shrimp", "lobster", "crab", "scallop", "mussel", "clam", "prawn", "calamari", "oyster",
+      "pancetta", "bacon", "prosciutto",
     ],
   },
   "Vegan": {
     tags: ["dairy", "egg"],
     keywords: [
-      "beef", "steak", "lamb", "veal", "pork", "chicken", "duck", "rabbit",
-      "fish", "salmon", "branzino", "tuna", "anchovy", "anchovies",
-      "shrimp", "lobster", "crab", "scallop", "mussel", "clam", "prawn",
-      "prosciutto", "pancetta", "guanciale", "bacon", "salami", "sausage",
+      "beef", "steak", "wagyu", "lamb", "veal", "pork", "chicken", "duck",
+      "fish", "salmon", "halibut", "snapper", "cod", "sole", "petrale", "flounder", "tuna", "anchovy",
+      "shrimp", "lobster", "crab", "scallop", "mussel", "clam", "prawn", "calamari", "oyster",
+      "pancetta", "bacon", "prosciutto",
       "honey", "butter", "cheese", "cream", "milk", "parmigiano", "parmesan",
-      "ricotta", "mozzarella", "burrata",
+      "ricotta", "mascarpone",
     ],
   },
 };
