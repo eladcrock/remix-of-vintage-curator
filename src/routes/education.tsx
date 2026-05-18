@@ -74,7 +74,7 @@ function EducationPage() {
   const [classFilter, setClassFilter] = useState<1 | 2 | 3 | 4 | 5 | null>(null);
   const [openClassId, setOpenClassId] = useState<number | null>(null);
   const [readClassId, setReadClassId] = useState<1 | 2 | 3 | 4 | 5 | null>(null);
-  const [onlyOnList, setOnlyOnList] = useState(false);
+  const [onlyOnList, setOnlyOnList] = useState(true);
   const selectedId = openId;
 
   const toggle = (id: string) => {
