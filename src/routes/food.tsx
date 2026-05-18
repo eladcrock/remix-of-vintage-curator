@@ -10,7 +10,7 @@
  */
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
-import { Search, X, Eye, EyeOff } from "lucide-react";
+import { Search, X } from "lucide-react";
 import { SiteNav } from "@/components/SiteNav";
 import { DishCard } from "@/components/DishCard";
 import {
