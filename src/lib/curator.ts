@@ -27,7 +27,7 @@ import {
 /** True if a dish is allowed under every active restriction. */
 function dishAllowed(dish: Dish, restrictions: string[]): boolean {
   const tagsLc = dish.dietaryRestrictions.map((t) => t.toLowerCase());
-  const hay = [dish.name, dish.description, ...dish.ingredients.map((i) => `${i.name} ${i.note}`)]
+  const hay = [dish.name, dish.description, ...(dish.ingredients ?? []).map((i) => `${i.name} ${i.note}`)]
     .join(" ")
     .toLowerCase();
 
