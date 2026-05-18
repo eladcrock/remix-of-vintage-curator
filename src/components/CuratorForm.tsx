@@ -12,11 +12,13 @@ import type { FoodCategory } from "@/lib/food";
 
 const ADDON_COURSES: (FoodCategory | "Any")[] = [
   "Any",
-  "Antipasti",
-  "Pasta",
-  "Secondi",
-  "Contorni",
-  "Dolci",
+  "Starters",
+  "Soup & Salad",
+  "Scoma's Classics",
+  "Seafood & Meat",
+  "Pastas",
+  "Sides",
+  "Dessert",
 ];
 
 export function CuratorForm({
@@ -34,7 +36,7 @@ export function CuratorForm({
   const [addOns, setAddOns] = useState<AddOn[]>([]);
   const [addName, setAddName] = useState("");
   const [addPrice, setAddPrice] = useState<string>("");
-  const [addCourse, setAddCourse] = useState<FoodCategory | "Any">("Pasta");
+  const [addCourse, setAddCourse] = useState<FoodCategory | "Any">("Pastas");
   const [addKind, setAddKind] = useState<"upgrade" | "course">("upgrade");
   const [addScope, setAddScope] = useState<"person" | "table">("person");
 

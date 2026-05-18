@@ -27,7 +27,7 @@ import {
 /** True if a dish is allowed under every active restriction. */
 function dishAllowed(dish: Dish, restrictions: string[]): boolean {
   const tagsLc = dish.dietaryRestrictions.map((t) => t.toLowerCase());
-  const hay = [dish.name, dish.description, ...dish.ingredients.map((i) => `${i.name} ${i.note}`)]
+  const hay = [dish.name, dish.description, ...(dish.ingredients ?? []).map((i) => `${i.name} ${i.note}`)]
     .join(" ")
     .toLowerCase();
 
@@ -44,7 +44,7 @@ type Candidate = Dish & { _price: number; _premium: boolean };
 
 function buildCandidates(restrictions: string[]): Candidate[] {
   // Exclude lunch-only dishes from tasting menus.
-  const base = ALL_DISHES.filter((d) => d.category !== "Lunch Only" && dishAllowed(d, restrictions));
+  const base = ALL_DISHES.filter((d) => dishAllowed(d, restrictions));
 
   // Per-category premium threshold: top 35% by price.
   const byCat = new Map<FoodCategory, Dish[]>();

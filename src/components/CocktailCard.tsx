@@ -80,19 +80,19 @@ export function CocktailCard({
             <p className="text-foreground/90">{c.character}</p>
           </Section>
 
-          {c.aLaMinute.length > 0 && (
+          {c.aLaMinute && c.aLaMinute.length > 0 && (
             <Section label="A La Minute">
               <RecipeList lines={c.aLaMinute} />
             </Section>
           )}
 
-          {c.batched.length > 0 && (
+          {c.batched && c.batched.length > 0 && (
             <Section label="Batched">
               <RecipeList lines={c.batched} />
             </Section>
           )}
 
-          {c.ingredients.length > 0 && (
+          {c.ingredients && c.ingredients.length > 0 && (
             <Section label="Ingredients">
               <dl className="space-y-2">
                 {c.ingredients.map((i) => (
