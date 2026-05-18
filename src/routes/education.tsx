@@ -163,7 +163,7 @@ function EducationPage() {
         {/* Country tabs + search */}
         <div className="mb-3 flex flex-wrap items-center gap-2">
           <div className="flex gap-1 rounded-md border border-border p-1">
-            {(["Italy", "France", "California"] as Country[]).map((c) => (
+            {availableCountries.map((c) => (
               <button
                 key={c}
                 onClick={() => setCountry(c)}
@@ -182,15 +182,6 @@ function EducationPage() {
             placeholder="Search regions, zones, grapes…"
             className="flex-1 min-w-[180px] rounded-md border border-border bg-background px-3 py-1.5 text-sm placeholder:text-muted-foreground/60 focus:outline-none focus:ring-1 focus:ring-primary"
           />
-          <label className="flex items-center gap-1.5 rounded-md border border-border px-2 py-1.5 text-[11px] font-medium cursor-pointer select-none hover:bg-muted/40">
-            <input
-              type="checkbox"
-              checked={onlyOnList}
-              onChange={(e) => setOnlyOnList(e.target.checked)}
-              className="h-3 w-3 accent-primary"
-            />
-            On list only
-          </label>
         </div>
 
 
