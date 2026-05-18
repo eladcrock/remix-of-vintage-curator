@@ -4,7 +4,7 @@
  * viewBox for its country's stylized SVG map.
  */
 
-export type Country = "Italy" | "France";
+export type Country = "Italy" | "France" | "California";
 
 export type GrapeNote = {
   name: string;
@@ -16,7 +16,8 @@ export type Region = {
   id: string;
   name: string;
   country: Country;
-  classRef: 1 | 2 | 3 | 4 | 5;
+  /** Optional — only used for the Italy/France Wine Class #1–#5 curriculum. */
+  classRef?: 1 | 2 | 3 | 4 | 5;
   zone?: string;
   x: number;
   y: number;
@@ -485,4 +486,132 @@ export const REGIONS: Region[] = [
     ],
     wineMatch: ["beaujolais","gamay","morgon","fleurie","moulin-a-vent","brouilly","julienas","saint-amour","chenas","chiroubles","regnie"],
   },
+
+  // ============================================================
+  // California — Scoma's home turf. Grouped North Coast / Central Coast / Inland.
+  // ============================================================
+  {
+    id: "mendocino", name: "Mendocino & Anderson Valley", country: "California", zone: "North Coast",
+    x: 16, y: 22,
+    summary: "Cool coastal pocket north of Sonoma. Anderson Valley funnels Pacific fog inland — a benchmark site for Pinot Noir, Chardonnay, Alsace whites and traditional-method sparkling.",
+    terroir: "Sandstone and weathered shale; deep marine fog with warm afternoons.",
+    wineNotes: "Anderson Valley: cool, foggy — Pinot Noir, Chardonnay, Gewürztraminer, Riesling, and traditional-method sparkling (Roederer Estate, Scharffenberger).\nMendocino Ridge & Yorkville Highlands: small high-elevation lots producing concentrated, structured reds.",
+    history: "Italian and Swiss immigrants planted Mendocino in the late 1800s. Louis Roederer established Roederer Estate in 1982, certifying Anderson Valley as one of America's premier sparkling appellations.",
+    grapes: [
+      { name: "Pinot Noir (Anderson Valley)", kind: "red", notes: "Bright red cherry, baking spice, savory undergrowth." },
+      { name: "Chardonnay (Anderson Valley)", kind: "white", notes: "Crisp orchard fruit, lemon zest, oyster-shell mineral." },
+      { name: "Sparkling (Anderson Valley)", kind: "sparkling", notes: "Traditional-method — Roederer Estate, Scharffenberger." },
+    ],
+    wineMatch: ["mendocino","anderson valley","yorkville"],
+  },
+  {
+    id: "sonoma-coast", name: "Sonoma Coast & Sonoma Mountain", country: "California", zone: "North Coast",
+    x: 22, y: 33,
+    summary: "Pacific-facing ridges with extreme fog and wind. Cool-climate Pinot Noir and Chardonnay — burgundian in spirit, distinctly Californian in fruit weight.",
+    terroir: "Goldridge sandy loam over Franciscan bedrock; volcanic uplift on Sonoma Mountain.",
+    wineNotes: "Sonoma Coast AVA is huge — focus on the 'true' coastal pockets (West Sonoma Coast, Fort Ross-Seaview).\nSonoma Mountain rises above the fog line: structured, age-worthy reds.",
+    history: "Pioneered in the 1970s–80s by David Hirsch, Burt Williams (Williams Selyem) and Helen Turley, who proved the far Sonoma Coast could grow world-class Pinot Noir.",
+    grapes: [
+      { name: "Pinot Noir (Sonoma Coast)", kind: "red", notes: "Wild strawberry, blood orange, sea spray, fine tannin." },
+      { name: "Chardonnay (Sonoma Coast)", kind: "white", notes: "Lemon curd, white peach, saline finish, restrained oak." },
+    ],
+    wineMatch: ["sonoma coast","sonoma mountain","fort ross","moon mountain"],
+  },
+  {
+    id: "russian-river", name: "Russian River Valley & Dry Creek", country: "California", zone: "North Coast",
+    x: 26, y: 32,
+    summary: "Heart of Sonoma. Fog crawls up the Russian River nightly — long, cool growing season for Pinot Noir, Chardonnay and old-vine Zinfandel. Dry Creek next door is Zin and Sauvignon Blanc country.",
+    terroir: "Goldridge sandy loam (RRV); gravelly benchland (Dry Creek).",
+    wineNotes: "RUSSIAN RIVER VALLEY: Pinot Noir, Chardonnay — Williams Selyem, Kistler, Kosta Browne, Marcassin.\nDRY CREEK VALLEY: old-vine Zinfandel benchmark; Sauvignon Blanc on warmer benches.\nALEXANDER VALLEY: warmer — Cabernet Sauvignon and Merlot.",
+    history: "Italian immigrant families planted field-blend Zinfandel in Dry Creek before Prohibition; many head-trained vines from the 1890s–1920s still bear fruit today.",
+    grapes: [
+      { name: "Pinot Noir (Russian River)", kind: "red", notes: "Bing cherry, cola, baking spice, soft tannin." },
+      { name: "Chardonnay (Russian River)", kind: "white", notes: "Yellow apple, lemon cream, brioche, balanced oak." },
+      { name: "Zinfandel (Dry Creek)", kind: "red", notes: "Briary brambleberry, black pepper, dried herb." },
+    ],
+    wineMatch: ["russian river","dry creek","alexander valley","sonoma"],
+  },
+  {
+    id: "napa-valley", name: "Napa Valley", country: "California", zone: "North Coast",
+    x: 30, y: 32,
+    summary: "America's most decorated wine region. Cabernet Sauvignon is king — from the gravelly Rutherford 'dust' to the mountain reds of Howell, Spring and Diamond. 16 sub-AVAs, each with a distinct fingerprint.",
+    terroir: "Volcanic and alluvial soils on the valley floor; iron-rich red volcanic up the mountains.",
+    wineNotes: "Sub-AVAs (south → north): Carneros (cool, Pinot/Chard) · Coombsville · Oak Knoll · Yountville · Stags Leap District · Oakville (Cab heartland — Opus One, Screaming Eagle) · Rutherford ('Rutherford dust', To Kalon) · St. Helena · Calistoga.\nMountain AVAs: Mount Veeder, Spring Mountain, Diamond Mountain (Mayacamas range, west); Howell Mountain, Atlas Peak, Pritchard Hill (Vaca range, east).",
+    history: "Charles Krug founded Napa's first commercial winery in 1861. The 1976 Judgment of Paris (Stag's Leap '73 Cabernet, Chateau Montelena '73 Chardonnay) put Napa on the world map. The 1968 Agricultural Preserve protected the valley from development.",
+    grapes: [
+      { name: "Cabernet Sauvignon (Napa)", kind: "red", notes: "Cassis, blackberry, cedar, cocoa, plush tannin. Oakville/Rutherford = benchmark." },
+      { name: "Chardonnay (Carneros)", kind: "white", notes: "Bright acid from cool Carneros — apple, pear, lemon, subtle oak." },
+      { name: "Pinot Noir (Carneros)", kind: "red", notes: "Cool-climate Pinot — red cherry, rose petal, light earth." },
+      { name: "Sauvignon Blanc (Napa)", kind: "white", notes: "Ripe grapefruit, fig, lemongrass — often barrel-fermented for richness." },
+    ],
+    wineMatch: ["napa","oakville","rutherford","carneros","stags leap","spring mountain","howell","mount veeder","atlas peak","coombsville","oak knoll","yountville","st helena","calistoga","pritchard"],
+  },
+  {
+    id: "lodi-sierra", name: "Lodi & Sierra Foothills", country: "California", zone: "Inland",
+    x: 42, y: 38,
+    summary: "Inland California — warm Mediterranean days, cool Delta-cooled nights (Lodi) and granite-soil mountain vineyards (Sierra Foothills). Old-vine Zinfandel, Rhône varieties, Spanish and Portuguese transplants.",
+    terroir: "Sandy loam over granite (Lodi); decomposed granite at 1,500–3,000 ft (Sierra Foothills).",
+    wineNotes: "LODI: more than 100 varieties planted; the world's largest concentration of pre-Prohibition own-rooted Zinfandel vines.\nSIERRA FOOTHILLS (Amador, El Dorado, Calaveras): rugged old-vine Zinfandel, Barbera, Syrah, Grenache.",
+    history: "Zinfandel vines planted in Lodi in the 1880s by Italian, German and Portuguese immigrants. Gold Rush miners planted the Sierra Foothills in the 1850s — some of California's oldest continuously farmed vineyards.",
+    grapes: [
+      { name: "Zinfandel (Lodi)", kind: "red", notes: "Jammy black fruit, peppered spice, soft tannin — old-vine concentration." },
+      { name: "Rhône varieties (Sierra Foothills)", kind: "red", notes: "Syrah, Grenache, Mourvèdre — warm fruit, mountain-grown structure." },
+    ],
+    wineMatch: ["lodi","sierra foothills","amador","el dorado","calaveras"],
+  },
+  {
+    id: "santa-cruz", name: "Santa Cruz Mountains", country: "California", zone: "Central Coast",
+    x: 26, y: 46,
+    summary: "Coastal range south of San Francisco. High-elevation, fog-influenced vineyards farmed by some of California's most idiosyncratic producers. Cabernet, Pinot Noir, Chardonnay.",
+    terroir: "Franciscan shale, sandstone, decomposed granite — vineyards from 400 to 2,600 ft.",
+    wineNotes: "Ridge Vineyards (Monte Bello) — benchmark mountain Cabernet since 1962; the '71 Monte Bello placed in the 1976 Judgment of Paris re-tasting decades later.\nMount Eden, Rhys, Varner — pinpoint Pinot and Chardonnay.",
+    history: "Paul Masson and Martin Ray pioneered the mountains in the early 20th c. Ridge Vineyards re-launched commercial wines from the historic Monte Bello vineyard in 1962.",
+    grapes: [
+      { name: "Cabernet Sauvignon (Santa Cruz Mtns)", kind: "red", notes: "Structured mountain Cab — graphite, cassis, dried herb." },
+      { name: "Pinot Noir (Santa Cruz Mtns)", kind: "red", notes: "Cool-climate, ferrous, savory red fruit." },
+      { name: "Chardonnay (Santa Cruz Mtns)", kind: "white", notes: "Tense acidity, citrus pith, flinty reduction." },
+    ],
+    wineMatch: ["santa cruz"],
+  },
+  {
+    id: "monterey", name: "Monterey & Santa Lucia Highlands", country: "California", zone: "Central Coast",
+    x: 30, y: 52,
+    summary: "Cool maritime corridor sucking fog off Monterey Bay. Santa Lucia Highlands is a narrow east-facing bench above the Salinas Valley — one of California's great Pinot Noir and Chardonnay sites.",
+    terroir: "Decomposed granite and alluvial bench soils; relentless afternoon wind extends hang-time.",
+    wineNotes: "SANTA LUCIA HIGHLANDS: Pisoni, Garys', Rosella's, Sleepy Hollow — coveted single vineyards.\nARROYO SECO & CHALONE: limestone-influenced; structured Chardonnay and Pinot.",
+    history: "Monterey's modern era began in the 1960s when UC Davis professors identified the cool corridor as ideal for Burgundy varieties. Gary Pisoni planted SLH in the 1980s.",
+    grapes: [
+      { name: "Pinot Noir (Santa Lucia Highlands)", kind: "red", notes: "Dark cherry, pomegranate, baking spice, satin tannin." },
+      { name: "Chardonnay (Monterey)", kind: "white", notes: "Lemon, white peach, oyster shell, balanced oak." },
+    ],
+    wineMatch: ["monterey","santa lucia highlands","arroyo seco","chalone","paicines"],
+  },
+  {
+    id: "paso-robles", name: "Paso Robles", country: "California", zone: "Central Coast",
+    x: 34, y: 60,
+    summary: "Warm-day / cold-night Central Coast region with calcareous soils. A playground for Rhône varieties and powerful Cabernet — Tablas Creek, Saxum, Justin, Daou.",
+    terroir: "Calcareous shale and limestone in the Adelaida District; alluvial loam east of the 101.",
+    wineNotes: "11 sub-AVAs. Adelaida District (west) is highest, coolest, most limestone-rich — Rhône blends and Cabernet.\nTablas Creek (joint venture with Château de Beaucastel) imported and propagated true Rhône clones for the entire West Coast.",
+    history: "Padres planted the first vines at Mission San Miguel in 1797. The modern Rhône movement took off in the 1980s; Tablas Creek's nursery seeded much of the New World's authentic Rhône plantings.",
+    grapes: [
+      { name: "Rhône blends (Paso Robles)", kind: "red", notes: "GSM — black raspberry, garrigue, white pepper, supple tannin." },
+      { name: "Cabernet Sauvignon (Paso Robles)", kind: "red", notes: "Ripe cassis, dark chocolate, vanilla — warmer style than Napa." },
+    ],
+    wineMatch: ["paso robles","adelaida"],
+  },
+  {
+    id: "santa-barbara", name: "Santa Barbara County", country: "California", zone: "Central Coast",
+    x: 38, y: 70,
+    summary: "Transverse coastal valleys (Santa Maria, Santa Ynez, Sta. Rita Hills) that open east-to-west, funneling Pacific air inland. The Sideways country — Pinot Noir, Chardonnay, Syrah.",
+    terroir: "Diatomaceous earth, marine sediment, sandy loam; some of the longest growing seasons in California.",
+    wineNotes: "STA. RITA HILLS: cool, windy — taut Pinot Noir and Chardonnay (Sea Smoke, Sandhi, Tyler, Domaine de la Côte).\nSANTA MARIA VALLEY: Bien Nacido vineyard — Au Bon Climat, Qupé legacy.\nBALLARD CANYON / HAPPY CANYON: warmer pockets for Syrah and Bordeaux varieties.",
+    history: "Modern era begins with Au Bon Climat (Jim Clendenen) and Qupé (Bob Lindquist) at Bien Nacido in the 1980s. Sta. Rita Hills AVA was carved out in 2001; the 2004 film *Sideways* put it on the map.",
+    grapes: [
+      { name: "Pinot Noir (Sta. Rita Hills)", kind: "red", notes: "Bright pomegranate, blood orange, salinity, fine-grained tannin." },
+      { name: "Chardonnay (Santa Maria)", kind: "white", notes: "Lemon, pineapple, oyster shell, long hang-time concentration." },
+      { name: "Syrah (Ballard Canyon)", kind: "red", notes: "Black olive, smoked meat, blackberry, cracked pepper." },
+    ],
+    wineMatch: ["santa maria","santa ynez","sta. rita","sta rita","ballard canyon","happy canyon","santa barbara"],
+  },
 ];
+

@@ -11,11 +11,10 @@ import { useMemo, useState } from "react";
 import { SiteNav } from "@/components/SiteNav";
 import { RegionMap } from "@/components/RegionMap";
 import { PierToPlate } from "@/components/PierToPlate";
-import { CLASSES, REGIONS, type Country, type Region } from "@/data/education";
+import { REGIONS, type Country, type Region } from "@/data/education";
 import { winesForRegion, zoneColor } from "@/lib/education";
 import type { Wine } from "@/lib/wines";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 
 export const Route = createFileRoute("/education")({
   head: () => ({
@@ -71,9 +70,6 @@ function EducationPage() {
   const [country, setCountry] = useState<Country>("Italy");
   const [query, setQuery] = useState("");
   const [openId, setOpenId] = useState<string | null>(null);
-  const [classFilter, setClassFilter] = useState<1 | 2 | 3 | 4 | 5 | null>(null);
-  const [openClassId, setOpenClassId] = useState<number | null>(null);
-  const [readClassId, setReadClassId] = useState<1 | 2 | 3 | 4 | 5 | null>(null);
   const [onlyOnList, setOnlyOnList] = useState(true);
   const selectedId = openId;
 
@@ -93,7 +89,6 @@ function EducationPage() {
   const visibleRegions = useMemo(() => {
     const q = query.trim().toLowerCase();
     return REGIONS.filter((r) => r.country === country).filter((r) => {
-      if (classFilter && r.classRef !== classFilter) return false;
       if (onlyOnList && winesForRegion(r).length === 0) return false;
       if (!q) return true;
       return (
@@ -103,7 +98,7 @@ function EducationPage() {
         r.grapes.some((g) => g.name.toLowerCase().includes(q) || g.notes.toLowerCase().includes(q))
       );
     });
-  }, [country, query, classFilter, onlyOnList]);
+  }, [country, query, onlyOnList]);
 
   // Group by zone for the mindmap.
   const zones = useMemo(() => {
@@ -156,7 +151,7 @@ function EducationPage() {
         {/* Country tabs + search */}
         <div className="mb-3 flex flex-wrap items-center gap-2">
           <div className="flex gap-1 rounded-md border border-border p-1">
-            {(["Italy", "France"] as Country[]).map((c) => (
+            {(["Italy", "France", "California"] as Country[]).map((c) => (
               <button
                 key={c}
                 onClick={() => setCountry(c)}
@@ -186,31 +181,7 @@ function EducationPage() {
           </label>
         </div>
 
-        {/* Quick class filter chips */}
-        <div className="mb-4 -mx-4 overflow-x-auto px-4 pb-1">
-          <div className="flex items-center gap-1.5 whitespace-nowrap">
-            <span className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground mr-1">Class</span>
-            <button
-              onClick={() => setClassFilter(null)}
-              className={`rounded-full border px-2.5 py-1 text-[11px] font-medium transition-colors ${
-                classFilter === null ? "bg-primary text-primary-foreground border-primary" : "border-border text-muted-foreground hover:text-foreground"
-              }`}
-            >All</button>
-            {CLASSES.map((c) => {
-              const active = classFilter === c.id;
-              return (
-                <button
-                  key={c.id}
-                  onClick={() => setClassFilter(active ? null : c.id)}
-                  title={c.blurb}
-                  className={`rounded-full border px-2.5 py-1 text-[11px] font-medium transition-colors ${
-                    active ? "bg-primary text-primary-foreground border-primary" : "border-border text-muted-foreground hover:text-foreground"
-                  }`}
-                >#{c.id}</button>
-              );
-            })}
-          </div>
-        </div>
+
 
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.6fr)]">
           {/* Map + legend (sticky on desktop) */}
@@ -235,43 +206,6 @@ function EducationPage() {
                       style={{ background: zoneColor(zone) }}
                     />
                     <span>{zone}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="rounded-lg border border-border bg-card p-3">
-              <h3 className="mb-2 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">Wine classes</h3>
-              <ul className="space-y-1">
-                {CLASSES.map((c) => (
-                  <li key={c.id}>
-                    <button
-                      onClick={() => setOpenClassId((p) => (p === c.id ? null : c.id))}
-                      className="flex w-full items-center justify-between gap-2 rounded px-2 py-1.5 text-left text-[11px] hover:bg-muted/40 transition-colors"
-                      aria-expanded={openClassId === c.id}
-                    >
-                      <span className="font-medium">{c.title}</span>
-                      <span aria-hidden className="text-muted-foreground">{openClassId === c.id ? "−" : "+"}</span>
-                    </button>
-                    {openClassId === c.id && (
-                      <div className="px-2 pb-2 text-[11px] text-muted-foreground space-y-1.5">
-                        <p>{c.blurb}</p>
-                        <div className="flex flex-wrap gap-1.5 pt-0.5">
-                          <button
-                            onClick={() => { setClassFilter(c.id); setOpenClassId(null); }}
-                            className="inline-block rounded-full border border-border px-2 py-0.5 text-[10px] font-medium hover:bg-muted/60"
-                          >
-                            Filter regions →
-                          </button>
-                          <button
-                            onClick={() => setReadClassId(c.id)}
-                            className="inline-block rounded-full bg-primary px-2 py-0.5 text-[10px] font-semibold text-primary-foreground hover:opacity-90"
-                          >
-                            Read full class
-                          </button>
-                        </div>
-                      </div>
-                    )}
                   </li>
                 ))}
               </ul>
@@ -312,7 +246,7 @@ function EducationPage() {
         </>
         )}
       </main>
-      <ClassReadDialog classId={readClassId} onClose={() => setReadClassId(null)} />
+      
     </div>
   );
 }
@@ -338,7 +272,7 @@ function RegionNode({
           <div className="min-w-0">
             <div className="text-sm font-semibold truncate">{region.name}</div>
             <div className="text-[10px] uppercase tracking-wider text-muted-foreground">
-              Class {region.classRef} · {wines.length} on list
+              {region.classRef ? `Class ${region.classRef} · ` : ""}{wines.length} on list
             </div>
           </div>
         </div>
@@ -388,7 +322,7 @@ function RegionNode({
                 <p className="text-foreground/90 whitespace-pre-line">{region.history}</p>
               ) : (
                 <p className="italic text-muted-foreground">
-                  Historical context for {region.name} — to be parsed from Wine Class #{region.classRef} materials.
+                  Historical context for {region.name} — coming soon.
                 </p>
               )}
             </TabsContent>
@@ -443,72 +377,5 @@ function RegionNode({
         </div>
       )}
     </div>
-  );
-}
-
-function ClassReadDialog({ classId, onClose }: { classId: 1 | 2 | 3 | 4 | 5 | null; onClose: () => void }) {
-  const cls = classId ? CLASSES.find((c) => c.id === classId) : null;
-  const regions = useMemo(
-    () => (classId ? REGIONS.filter((r) => r.classRef === classId) : []),
-    [classId],
-  );
-
-  return (
-    <Dialog open={classId !== null} onOpenChange={(o) => !o && onClose()}>
-      <DialogContent className="max-w-3xl max-h-[85vh] overflow-y-auto">
-        {cls && (
-          <>
-            <DialogHeader>
-              <DialogTitle className="text-base">{cls.title}</DialogTitle>
-              <DialogDescription className="text-xs">{cls.blurb}</DialogDescription>
-            </DialogHeader>
-            <div className="mt-3 space-y-6 text-sm">
-              {regions.map((r) => (
-                <article key={r.id} className="border-t border-border/60 pt-4 first:border-t-0 first:pt-0">
-                  <header className="mb-2">
-                    <h3 className="text-base font-semibold">{r.name}</h3>
-                    {r.zone && (
-                      <p className="text-[10px] uppercase tracking-wider text-muted-foreground">{r.zone}</p>
-                    )}
-                  </header>
-                  <p className="text-foreground/90">{r.summary}</p>
-                  {r.terroir && (
-                    <p className="mt-2 text-muted-foreground">
-                      <span className="font-semibold uppercase tracking-wider text-[10px] text-foreground/70">Terroir · </span>
-                      {r.terroir}
-                    </p>
-                  )}
-                  {r.wineNotes && (
-                    <div className="mt-2">
-                      <h4 className="text-[10px] font-semibold uppercase tracking-wider text-foreground/70">Wine Notes</h4>
-                      <p className="whitespace-pre-line text-foreground/90">{r.wineNotes}</p>
-                    </div>
-                  )}
-                  {r.history && (
-                    <div className="mt-2">
-                      <h4 className="text-[10px] font-semibold uppercase tracking-wider text-foreground/70">History</h4>
-                      <p className="whitespace-pre-line text-foreground/90">{r.history}</p>
-                    </div>
-                  )}
-                  {r.grapes.length > 0 && (
-                    <div className="mt-2">
-                      <h4 className="text-[10px] font-semibold uppercase tracking-wider text-foreground/70">Grapes</h4>
-                      <ul className="space-y-0.5">
-                        {r.grapes.map((g) => (
-                          <li key={g.name} className="text-foreground/90">
-                            <span className="font-semibold">{g.name}</span>
-                            <span className="text-muted-foreground"> — {g.notes}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-                </article>
-              ))}
-            </div>
-          </>
-        )}
-      </DialogContent>
-    </Dialog>
   );
 }

@@ -113,6 +113,57 @@ function FranceShape({ fill, stroke }: ShapeProps) {
   );
 }
 
+function CaliforniaShape({ fill, stroke }: ShapeProps) {
+  return (
+    <>
+      {/*
+        California — stylized state outline tuned to the (0..100, 0..100)
+        viewBox used by region coords. North top-left (Oregon border), long
+        Pacific coast on the west tilting SE, blunt southern border to
+        Mexico, Sierra Nevada spine on the east, Nevada/Arizona on the NE.
+      */}
+      <path
+        d="
+          M 10,8
+          L 36,8
+          L 38,14
+          L 44,20
+          L 50,28
+          L 54,36
+          L 56,44
+          L 56,52
+          L 54,58
+          L 52,64
+          L 50,70
+          L 50,76
+          L 46,82
+          L 42,86
+          L 40,90
+          L 36,92
+          L 30,90
+          L 28,84
+          L 26,78
+          L 22,70
+          L 18,62
+          L 14,54
+          L 12,46
+          L 10,38
+          L 9,30
+          L 8,22
+          L 9,14
+          Z
+        "
+        fill={fill} stroke={stroke} strokeWidth="0.6" strokeLinejoin="round"
+      />
+      {/* San Francisco Bay notch — small bite on the coast around the Golden Gate */}
+      <path
+        d="M 18,34 C 22,32 26,32 28,34 C 26,36 22,36 18,36 Z"
+        fill="oklch(0.94 0.022 230)" stroke={stroke} strokeWidth="0.3"
+      />
+    </>
+  );
+}
+
 export function RegionMap({
   country,
   regions,
@@ -128,8 +179,9 @@ export function RegionMap({
 
   // Default viewBox per country — France is small/clustered, so we crop in.
   const DEFAULTS: Record<Country, { x: number; y: number; w: number; h: number }> = {
-    Italy:  { x: 10, y: 10, w: 80, h: 90 },
-    France: { x: 14, y: 14, w: 60, h: 60 },
+    Italy:      { x: 10, y: 10, w: 80, h: 90 },
+    France:     { x: 14, y: 14, w: 60, h: 60 },
+    California: { x: 4,  y: 4,  w: 60, h: 92 },
   };
 
   const [vb, setVb] = useState(DEFAULTS[country]);
@@ -209,9 +261,13 @@ export function RegionMap({
 
       {/* Sea / canvas — always bright so labels read in light & dark mode */}
         <rect x="-10" y="-10" width="120" height="120" fill="url(#seaGrad)" />
-      {country === "Italy"
-        ? <ItalyShape fill="oklch(0.985 0.01 95)" stroke="oklch(0.30 0.05 250)" />
-        : <FranceShape fill="oklch(0.985 0.01 95)" stroke="oklch(0.30 0.05 250)" />}
+      {country === "Italy" ? (
+        <ItalyShape fill="oklch(0.985 0.01 95)" stroke="oklch(0.30 0.05 250)" />
+      ) : country === "France" ? (
+        <FranceShape fill="oklch(0.985 0.01 95)" stroke="oklch(0.30 0.05 250)" />
+      ) : (
+        <CaliforniaShape fill="oklch(0.985 0.01 95)" stroke="oklch(0.30 0.05 250)" />
+      )}
 
       {items.map((r) => {
         const active = r.id === selectedId;

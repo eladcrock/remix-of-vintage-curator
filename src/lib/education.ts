@@ -16,6 +16,10 @@ export const ZONE_COLORS: Record<string, string> = {
   "Right Bank":       "oklch(0.55 0.20 350)",  // claret
   "Bordeaux":         "oklch(0.55 0.18 320)",  // bordeaux pink
   "Burgundy":         "oklch(0.50 0.18 20)",   // burgundy red
+  // California
+  "North Coast":      "oklch(0.55 0.20 25)",   // Napa cabernet red
+  "Central Coast":    "oklch(0.62 0.16 200)",  // Pacific blue
+  "Inland":           "oklch(0.65 0.15 95)",   // golden hills
 };
 
 export function zoneColor(zone?: string): string {
