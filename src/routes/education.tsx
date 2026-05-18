@@ -89,7 +89,6 @@ function EducationPage() {
   const visibleRegions = useMemo(() => {
     const q = query.trim().toLowerCase();
     return REGIONS.filter((r) => r.country === country).filter((r) => {
-      if (classFilter && r.classRef !== classFilter) return false;
       if (onlyOnList && winesForRegion(r).length === 0) return false;
       if (!q) return true;
       return (
@@ -99,7 +98,7 @@ function EducationPage() {
         r.grapes.some((g) => g.name.toLowerCase().includes(q) || g.notes.toLowerCase().includes(q))
       );
     });
-  }, [country, query, classFilter, onlyOnList]);
+  }, [country, query, onlyOnList]);
 
   // Group by zone for the mindmap.
   const zones = useMemo(() => {
