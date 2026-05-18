@@ -80,11 +80,13 @@ export function DishCard({
             </div>
           )}
 
-          <Section label="Preparation">
-            <p className="text-foreground/90">{d.preparation}</p>
-          </Section>
+          {d.preparation && (
+            <Section label="Preparation">
+              <p className="text-foreground/90">{d.preparation}</p>
+            </Section>
+          )}
 
-          {d.ingredients.length > 0 && (
+          {d.ingredients && d.ingredients.length > 0 && (
             <Section label="Ingredients & Sub-recipes">
               <dl className="space-y-2">
                 {d.ingredients.map((i) => (
