@@ -11,11 +11,10 @@ import { useMemo, useState } from "react";
 import { SiteNav } from "@/components/SiteNav";
 import { RegionMap } from "@/components/RegionMap";
 import { PierToPlate } from "@/components/PierToPlate";
-import { CLASSES, REGIONS, type Country, type Region } from "@/data/education";
+import { REGIONS, type Country, type Region } from "@/data/education";
 import { winesForRegion, zoneColor } from "@/lib/education";
 import type { Wine } from "@/lib/wines";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 
 export const Route = createFileRoute("/education")({
   head: () => ({
