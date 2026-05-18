@@ -272,7 +272,7 @@ function RegionNode({
           <div className="min-w-0">
             <div className="text-sm font-semibold truncate">{region.name}</div>
             <div className="text-[10px] uppercase tracking-wider text-muted-foreground">
-              Class {region.classRef} · {wines.length} on list
+              {region.classRef ? `Class ${region.classRef} · ` : ""}{wines.length} on list
             </div>
           </div>
         </div>
