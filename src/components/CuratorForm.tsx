@@ -12,11 +12,13 @@ import type { FoodCategory } from "@/lib/food";
 
 const ADDON_COURSES: (FoodCategory | "Any")[] = [
   "Any",
-  "Antipasti",
-  "Pasta",
-  "Secondi",
-  "Contorni",
-  "Dolci",
+  "Starters",
+  "Soup & Salad",
+  "Scoma's Classics",
+  "Seafood & Meat",
+  "Pastas",
+  "Sides",
+  "Dessert",
 ];
 
 export function CuratorForm({
