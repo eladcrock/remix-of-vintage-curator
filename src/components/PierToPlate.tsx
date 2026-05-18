@@ -35,11 +35,11 @@ const SOURCING: SourcePin[] = [
   },
   {
     id: "bc",
-    name: "British Columbia",
+    name: "British Columbia (Vancouver Island)",
     x: 38,
     y: 28,
-    species: ["Sablefish", "Spot Prawns", "Wild Salmon"],
-    note: "Pacific Northwest fjords. Trap-caught sablefish & prawns, gear that leaves the seabed untouched.",
+    species: ["Sustainably Farmed King Salmon", "Sablefish", "Oysters"],
+    note: "Creative Salmon out of Tofino raises our ocean-farmed king salmon to the highest sustainability standards (Ocean Wise, Best Aquaculture Practices). Most of our oysters also come from BC growers, joined by Hood Canal, Washington.",
   },
   {
     id: "wa-or",
