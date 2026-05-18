@@ -309,6 +309,8 @@ function EducationPage() {
             })}
           </section>
         </div>
+        </>
+        )}
       </main>
       <ClassReadDialog classId={readClassId} onClose={() => setReadClassId(null)} />
     </div>
