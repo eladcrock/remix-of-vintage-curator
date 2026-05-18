@@ -257,6 +257,51 @@ export function PierToPlate() {
         </div>
       </section>
 
+      <section className="rounded-lg border border-border bg-card p-4">
+        <h3 className="text-sm font-semibold">Oyster education</h3>
+        <p className="mt-1 text-[11px] text-muted-foreground">
+          Five species, hundreds of names. Where the oyster is grown,
+          its "merroir", drives most of the flavor difference. Most of our
+          oysters arrive from BC and Washington's Hood Canal.
+        </p>
+
+        <div className="mt-3 grid grid-cols-1 gap-4 md:grid-cols-[260px_minmax(0,1fr)]">
+          <div className="rounded-md border border-border bg-background/40 p-2">
+            <OysterMap pins={OYSTER_PINS} />
+          </div>
+
+          <Accordion type="single" collapsible className="w-full">
+            {OYSTER_FAMILIES.map((f) => (
+              <AccordionItem key={f.id} value={f.id}>
+                <AccordionTrigger className="text-left">
+                  <div className="flex flex-col">
+                    <span className="text-sm font-semibold">{f.name}</span>
+                    <span className="text-[11px] italic text-muted-foreground">
+                      {f.species}
+                    </span>
+                  </div>
+                </AccordionTrigger>
+                <AccordionContent className="space-y-2 text-xs leading-relaxed text-foreground/90">
+                  <p><span className="font-semibold">Origin: </span>{f.origin}</p>
+                  <p><span className="font-semibold">Flavor: </span>{f.flavor}</p>
+                  <div className="flex flex-wrap gap-1 pt-1">
+                    {f.examples.map((ex) => (
+                      <span
+                        key={ex}
+                        className="rounded-full border border-border bg-card px-2 py-0.5 text-[10px] uppercase tracking-wide text-muted-foreground"
+                      >
+                        {ex}
+                      </span>
+                    ))}
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
+      </section>
+
+
       <section className="grid grid-cols-1 gap-3 md:grid-cols-2">
         {STORIES.map((s) => (
           <article
