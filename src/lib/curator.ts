@@ -332,15 +332,15 @@ export function curateMenus(
   return {
     options: [
       picksToOption(
-        "Trattoria Classica",
-        "Traditional Italian comfort — balanced and crowd-pleasing.",
+        "Wharf Classic",
+        "Scoma's signatures, balanced and crowd-pleasing.",
         classica,
         req.guests,
         req,
       ),
       picksToOption(
-        "Indulgente",
-        "Premium proteins and richer flavors — a celebratory build.",
+        "Captain's Catch",
+        "Premium seafood and richer builds — a celebratory progression.",
         indulgente,
         req.guests,
         req,

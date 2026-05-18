@@ -14,12 +14,12 @@ export const COURSE_FLOW: FoodCategory[] = [
   "Starters",
   "Soup & Salad",
   "Pastas",
-  "Seafood & Meat",
+  "Scoma's Classics",
   "Dessert",
 ];
 
 /** Drop order when the budget is too low to fit the full flow. */
-export const DROP_ORDER: FoodCategory[] = ["Soup & Salad", "Pastas"];
+export const DROP_ORDER: FoodCategory[] = ["Pastas", "Soup & Salad"];
 
 /**
  * Premium dish ids — preferred by the "Chef's Catch" option, reserved for
