@@ -50,11 +50,50 @@ function useUrlQuery() {
   return [q, update] as const;
 }
 
+type TagState = "include" | "exclude";
+
+function dishHasTag(d: { dietaryRestrictions: string[] }, tag: string): boolean {
+  const t = tag.toLowerCase();
+  return d.dietaryRestrictions.some((x) => x.toLowerCase() === t);
+}
+
 function FoodPage() {
   const [q, setQ] = useUrlQuery();
-  const filtered = useMemo(() => filterDishes(q), [q]);
-  const grouped = useMemo(() => groupByCategory(filtered), [filtered]);
+  const [tagFilters, setTagFilters] = useState<Record<string, TagState>>({});
   const tagSuggestions = useMemo(() => allDietaryTags(), []);
+
+  const filtered = useMemo(() => {
+    const base = filterDishes(q);
+    const entries = Object.entries(tagFilters);
+    if (entries.length === 0) return base;
+    return base.filter((d) => {
+      for (const [tag, state] of entries) {
+        const has = dishHasTag(d, tag);
+        if (state === "include" && !has) return false;
+        if (state === "exclude" && has) return false;
+      }
+      return true;
+    });
+  }, [q, tagFilters]);
+
+  const grouped = useMemo(() => groupByCategory(filtered), [filtered]);
+
+  function cycleTag(tag: string) {
+    setTagFilters((cur) => {
+      const next = { ...cur };
+      const s = cur[tag];
+      if (!s) next[tag] = "include";
+      else if (s === "include") next[tag] = "exclude";
+      else delete next[tag];
+      return next;
+    });
+  }
+
+  function clearTags() {
+    setTagFilters({});
+  }
+
+  const activeTagCount = Object.keys(tagFilters).length;
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -68,7 +107,7 @@ function FoodPage() {
           <Input
             value={q}
             onChange={(e) => setQ(e.target.value)}
-            placeholder="Search ingredient or allergen… (e.g. gluten, truffle, shellfish)"
+            placeholder="Search ingredient or allergen… (e.g. truffle, scallop, lemon)"
             className="h-11 pl-10 text-base"
           />
           {q && (
@@ -84,23 +123,43 @@ function FoodPage() {
 
         {tagSuggestions.length > 0 && (
           <div className="mt-3">
-            <div className="mb-1 text-[10px] uppercase tracking-wider text-muted-foreground">
-              Quick allergen filters
+            <div className="mb-1 flex items-center justify-between">
+              <div className="text-[10px] uppercase tracking-wider text-muted-foreground">
+                Allergen filters · tap to include · tap again to exclude
+              </div>
+              {activeTagCount > 0 && (
+                <button
+                  onClick={clearTags}
+                  className="rounded px-2 py-0.5 text-[10px] uppercase tracking-wider text-muted-foreground hover:bg-secondary hover:text-foreground"
+                >
+                  Clear {activeTagCount}
+                </button>
+              )}
             </div>
             <div className="flex flex-wrap gap-1.5">
               {tagSuggestions.map((tag) => {
-                const active = q.toLowerCase() === tag.toLowerCase();
+                const state = tagFilters[tag];
+                const cls =
+                  state === "include"
+                    ? "border-primary bg-primary text-primary-foreground"
+                    : state === "exclude"
+                    ? "border-destructive bg-destructive/10 text-destructive line-through"
+                    : "border-border bg-card text-muted-foreground hover:border-primary/40 hover:text-foreground";
+                const mark = state === "include" ? "✓ " : state === "exclude" ? "✕ " : "";
                 return (
                   <button
                     key={tag}
-                    onClick={() => setQ(active ? "" : tag)}
-                    className={`rounded-full border px-2.5 py-1 text-xs transition-colors ${
-                      active
-                        ? "border-primary bg-primary text-primary-foreground"
-                        : "border-border bg-card text-muted-foreground hover:border-primary/40 hover:text-foreground"
-                    }`}
+                    onClick={() => cycleTag(tag)}
+                    title={
+                      state === "include"
+                        ? `Showing only dishes with ${tag}. Click to exclude.`
+                        : state === "exclude"
+                        ? `Hiding dishes with ${tag}. Click to clear.`
+                        : `Click to show only ${tag}.`
+                    }
+                    className={`rounded-full border px-2.5 py-1 text-xs transition-colors ${cls}`}
                   >
-                    {tag}
+                    {mark}{tag}
                   </button>
                 );
               })}
@@ -114,9 +173,9 @@ function FoodPage() {
               {filtered.length}
             </span>{" "}
             dish{filtered.length === 1 ? "" : "es"}
-            {q && (
+            {(q || activeTagCount > 0) && (
               <button
-                onClick={() => setQ("")}
+                onClick={() => { setQ(""); clearTags(); }}
                 className="ml-2 rounded px-2 py-0.5 text-xs text-muted-foreground hover:bg-secondary hover:text-foreground"
               >
                 Show all
@@ -128,9 +187,9 @@ function FoodPage() {
 
         {filtered.length === 0 ? (
           <div className="mt-3 rounded-lg border border-dashed border-border bg-card/50 px-4 py-10 text-center text-sm text-muted-foreground">
-            No dishes match “{q}”.
+            No dishes match your filters.
             <br />
-            Try an allergen like <em>gluten</em>, <em>shellfish</em>, or an ingredient like <em>truffle</em>.
+            Try removing an allergen or clearing the search.
           </div>
         ) : (
           <div className="mt-4 space-y-6">
