@@ -1,9 +1,16 @@
 /**
  * Pier-to-Plate education panel for Scoma's.
  * Covers: fish sourcing map, the Mr. Morgan boat & Steve Fitz, low-impact
- * Scottish-seine fishing for sand dabs & petrale, plus Scoma's / Fisherman's
- * Wharf history. Hand-edit SOURCING and STORIES below to refine.
+ * Scottish-seine fishing for sand dabs & petrale, oyster education, plus
+ * Scoma's / Fisherman's Wharf history. Hand-edit data below to refine.
  */
+
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 type SourcePin = {
   id: string;
