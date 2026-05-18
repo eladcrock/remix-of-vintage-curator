@@ -114,7 +114,6 @@ export type DishCatalogEntry = {
 
 export function dishesAsCatalog(dishes: Dish[] = ALL_DISHES): DishCatalogEntry[] {
   return dishes
-    .filter((d) => d.category !== "Lunch Only")
     .map((d) => ({
       id: d.id,
       name: d.name,
