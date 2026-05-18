@@ -1,5 +1,5 @@
 /**
- * Scoma's Experience Curator tunables — deterministic, no AI.
+ * Scoma's Experience Curator tunables, deterministic, no AI.
  *
  * Course flow tuned for a seafood-forward Fisherman's Wharf menu.
  * Logic lives in src/lib/curator.ts.
@@ -22,7 +22,7 @@ export const COURSE_FLOW: FoodCategory[] = [
 export const DROP_ORDER: FoodCategory[] = ["Pastas", "Soup & Salad"];
 
 /**
- * Premium dish ids — preferred by the "Chef's Catch" option, reserved for
+ * Premium dish ids, preferred by the "Chef's Catch" option, reserved for
  * the upper end of the budget range. The algorithm also auto-detects
  * premium by price (top 35% in each category).
  */

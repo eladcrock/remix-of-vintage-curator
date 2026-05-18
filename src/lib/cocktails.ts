@@ -27,7 +27,7 @@ export type Cocktail = {
   name: string;
   menuDescription: string;
   kind?: CocktailKind;
-  /** Optional — short flavor / vibe summary. */
+  /** Optional, short flavor / vibe summary. */
   character?: string;
   aLaMinute?: RecipeLine[];
   batched?: RecipeLine[];
@@ -72,7 +72,7 @@ export function filterCocktails(query: string, list: Cocktail[] = ALL_COCKTAILS)
 }
 
 export function formatCocktailPrice(c: Cocktail): string {
-  return c.price == null ? "—" : `$${c.price}`;
+  return c.price == null ? "-" : `$${c.price}`;
 }
 
 export function allDietaryTags(list: Cocktail[] = ALL_COCKTAILS): string[] {

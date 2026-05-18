@@ -1,5 +1,5 @@
 /**
- * Education — region-coded mindmap.
+ * Education, region-coded mindmap.
  *
  * Layout: country map (left) acts as a visual index. Region nodes (right) are
  * grouped by zone and color-coded. Click any node to expand inline drop-downs
@@ -20,9 +20,9 @@ export const Route = createFileRoute("/education")({
   head: () => ({
     meta: [
       { title: "Scoma's Pro · Education" },
-      { name: "description", content: "Region-coded wine mindmap — Scoma's Wine Class #1–#5, cross-referenced with our list." },
+      { name: "description", content: "Region-coded wine mindmap, Scoma's Wine Class #1–#5, cross-referenced with our list." },
       { property: "og:title", content: "Scoma's Pro · Education" },
-      { property: "og:description", content: "Where knowledge meets service — a region-coded wine mindmap." },
+      { property: "og:description", content: "Where knowledge meets service, a region-coded wine mindmap." },
     ],
   }),
   component: EducationPage,
@@ -32,7 +32,7 @@ const KIND_EMOJI: Record<string, string> = {
   red: "🍷", white: "🥂", sparkling: "🍾", dessert: "🍯", rose: "🌸",
 };
 
-// Visual color-coding for wine types — keeps red vs white instantly scannable.
+// Visual color-coding for wine types, keeps red vs white instantly scannable.
 const TYPE_STYLE: Record<string, { bar: string; chip: string; label: string }> = {
   Red:       { bar: "oklch(0.42 0.16 18)",  chip: "bg-[oklch(0.42_0.16_18)] text-white",        label: "Red" },
   White:     { bar: "oklch(0.80 0.12 70)",  chip: "bg-[oklch(0.92_0.09_70)] text-[oklch(0.32_0.08_55)]", label: "White" },
@@ -41,7 +41,7 @@ const TYPE_STYLE: Record<string, { bar: string; chip: string; label: string }> =
   
   Dessert:   { bar: "oklch(0.70 0.14 85)",  chip: "bg-[oklch(0.90_0.10_85)] text-[oklch(0.35_0.08_70)]", label: "Dessert" },
 };
-const DEFAULT_TYPE = { bar: "oklch(0.6 0 0)", chip: "bg-muted text-foreground", label: "—" };
+const DEFAULT_TYPE = { bar: "oklch(0.6 0 0)", chip: "bg-muted text-foreground", label: "-" };
 
 // Grape-kind tinting for the Grapes drop-down.
 const KIND_TINT: Record<string, string> = {
@@ -56,11 +56,11 @@ function priceLabel(w: Wine): string {
   const parts: string[] = [];
   if (w.priceGlass != null) parts.push(`gl $${w.priceGlass}`);
   if (w.priceBottle != null) parts.push(`btl $${w.priceBottle}`);
-  return parts.join(" · ") || "—";
+  return parts.join(" · ") || "-";
 }
 
 function wineName(w: Wine): string {
-  // Name only — producer + cuvee fallbacks.
+  // Name only, producer + cuvee fallbacks.
   if (w.cuvee && w.producer) return `${w.producer} · ${w.cuvee}`;
   return w.cuvee || w.producer || w.varietal || "Untitled";
 }
@@ -72,7 +72,7 @@ function EducationPage() {
   const [openId, setOpenId] = useState<string | null>(null);
   const selectedId = openId;
 
-  // Only show regions actually represented on Scoma's wine list — there's no
+  // Only show regions actually represented on Scoma's wine list, there's no
   // point teaching Bordeaux/Burgundy curriculum we don't pour.
   const ON_LIST_REGIONS = useMemo(
     () => REGIONS.filter((r) => winesForRegion(r).length > 0),
@@ -134,7 +134,7 @@ function EducationPage() {
             </h2>
             <p className="text-xs text-muted-foreground">
               {topTab === "pier"
-                ? "Where Scoma's seafood comes from — sourcing, fishermen, sustainability, and 60 years on the Wharf."
+                ? "Where Scoma's seafood comes from, sourcing, fishermen, sustainability, and 60 years on the Wharf."
                 : "Scoma's Wine Class #1–#5, mapped. Tap a region on the map or in the list to read terroir, history, grapes, and the bottles we pour."}
             </p>
           </div>
@@ -306,7 +306,7 @@ function RegionNode({
               ) : (
                 <div className="space-y-2">
                   <p className="italic text-muted-foreground">
-                    Signature profile distilled from this region's grapes — extended service notes coming from Wine Class materials.
+                    Signature profile distilled from this region's grapes, extended service notes coming from Wine Class materials.
                   </p>
                   <ul className="space-y-1">
                     {region.grapes.slice(0, 4).map((g) => (
@@ -325,7 +325,7 @@ function RegionNode({
                 <p className="text-foreground/90 whitespace-pre-line">{region.history}</p>
               ) : (
                 <p className="italic text-muted-foreground">
-                  Historical context for {region.name} — coming soon.
+                  Historical context for {region.name}, coming soon.
                 </p>
               )}
             </TabsContent>

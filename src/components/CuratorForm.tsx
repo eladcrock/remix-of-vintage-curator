@@ -97,7 +97,7 @@ export function CuratorForm({
         </label>
         <label className="text-xs">
           <span className="mb-1 block font-medium text-muted-foreground">
-            Budget / person — min
+            Budget / person, min
           </span>
           <Input
             type="number"
@@ -108,7 +108,7 @@ export function CuratorForm({
         </label>
         <label className="text-xs">
           <span className="mb-1 block font-medium text-muted-foreground">
-            Budget / person — max
+            Budget / person, max
           </span>
           <Input
             type="number"
@@ -152,7 +152,7 @@ export function CuratorForm({
       <div className="mt-4">
         <label className="text-xs">
           <span className="mb-1 block font-medium text-muted-foreground">
-            Note for kitchen (pass-through — not used to build the menu)
+            Note for kitchen (pass-through, not used to build the menu)
           </span>
           <Textarea
             value={notes}

@@ -1,7 +1,7 @@
 /**
  * Food tab.
  *
- * Single search bar — AND-matches across name, description, preparation,
+ * Single search bar, AND-matches across name, description, preparation,
  * ingredients, allergens, info (see searchHaystack in src/lib/food.ts).
  * Dishes are grouped by category (Antipasti → Pasta → Secondi → Contorni →
  * Dolci → Lunch Only).
