@@ -322,7 +322,7 @@ function RegionNode({
                 <p className="text-foreground/90 whitespace-pre-line">{region.history}</p>
               ) : (
                 <p className="italic text-muted-foreground">
-                  Historical context for {region.name} — to be parsed from Wine Class #{region.classRef} materials.
+                  Historical context for {region.name} — coming soon.
                 </p>
               )}
             </TabsContent>
