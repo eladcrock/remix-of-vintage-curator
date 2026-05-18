@@ -1,9 +1,16 @@
 /**
  * Pier-to-Plate education panel for Scoma's.
  * Covers: fish sourcing map, the Mr. Morgan boat & Steve Fitz, low-impact
- * Scottish-seine fishing for sand dabs & petrale, plus Scoma's / Fisherman's
- * Wharf history. Hand-edit SOURCING and STORIES below to refine.
+ * Scottish-seine fishing for sand dabs & petrale, oyster education, plus
+ * Scoma's / Fisherman's Wharf history. Hand-edit data below to refine.
  */
+
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 type SourcePin = {
   id: string;
@@ -28,19 +35,19 @@ const SOURCING: SourcePin[] = [
   },
   {
     id: "bc",
-    name: "British Columbia",
+    name: "British Columbia (Vancouver Island)",
     x: 38,
     y: 28,
-    species: ["Sablefish", "Spot Prawns", "Wild Salmon"],
-    note: "Pacific Northwest fjords. Trap-caught sablefish & prawns, gear that leaves the seabed untouched.",
+    species: ["Sustainably Farmed King Salmon", "Sablefish", "Oysters"],
+    note: "Creative Salmon out of Tofino raises our ocean-farmed king salmon to the highest sustainability standards (Ocean Wise, Best Aquaculture Practices). Most of our oysters also come from BC growers, joined by Hood Canal, Washington.",
   },
   {
     id: "wa-or",
     name: "Washington & Oregon Coast",
     x: 42,
     y: 42,
-    species: ["Dungeness Crab", "Petrale Sole", "Rockfish"],
-    note: "Pots and hook-and-line fisheries supplementing California's Dungeness season.",
+    species: ["Dungeness Crab", "Petrale Sole", "Rockfish", "Hood Canal Oysters"],
+    note: "Pots and hook-and-line fisheries supplementing California's Dungeness season; Hood Canal (Puget Sound) is one of the world's great oyster nurseries and supplies many of our Pacific varieties.",
   },
   {
     id: "norcal",
@@ -116,7 +123,88 @@ const STORIES: { id: string; title: string; body: string[] }[] = [
   },
 ];
 
+type OysterPin = {
+  id: string;
+  /** label drawn on the map */
+  short: string;
+  /** % x/y on a simplified world rectangle */
+  x: number;
+  y: number;
+};
+
+const OYSTER_PINS: OysterPin[] = [
+  { id: "bc", short: "BC", x: 14, y: 30 },
+  { id: "hood", short: "Hood Canal", x: 13, y: 35 },
+  { id: "tomales", short: "Tomales", x: 14, y: 44 },
+  { id: "humboldt", short: "Humboldt", x: 13, y: 41 },
+  { id: "ne", short: "New England", x: 30, y: 38 },
+  { id: "chesapeake", short: "Chesapeake", x: 29, y: 44 },
+  { id: "gulf", short: "Gulf", x: 25, y: 52 },
+  { id: "france", short: "France", x: 47, y: 36 },
+  { id: "ireland", short: "Ireland", x: 45, y: 32 },
+  { id: "japan", short: "Japan", x: 82, y: 42 },
+];
+
+type OysterFamily = {
+  id: string;
+  species: string; // latin
+  name: string;
+  origin: string;
+  flavor: string;
+  examples: string[];
+  regions: string[]; // pin ids
+};
+
+const OYSTER_FAMILIES: OysterFamily[] = [
+  {
+    id: "pacific",
+    species: "Crassostrea gigas",
+    name: "Pacific (Miyagi)",
+    origin: "Native to Japan; now the dominant farmed oyster on the U.S. West Coast.",
+    flavor: "Plump, creamy body with cucumber and melon notes; salinity varies by bay.",
+    examples: ["Kusshi (BC)", "Fanny Bay (BC)", "Hama Hama (Hood Canal)", "Totten Inlet (WA)"],
+    regions: ["bc", "hood", "tomales"],
+  },
+  {
+    id: "kumamoto",
+    species: "Crassostrea sikamea",
+    name: "Kumamoto",
+    origin: "Originally from Kyushu, Japan; rescued from near-extinction by PNW farms.",
+    flavor: "Small, deep-cupped, sweet with a honeydew finish and very mild brine.",
+    examples: ["Humboldt Kumamoto (CA)", "Taylor Kumamoto (WA)"],
+    regions: ["humboldt", "hood", "japan"],
+  },
+  {
+    id: "virginica",
+    species: "Crassostrea virginica",
+    name: "Eastern / Atlantic",
+    origin: "Native from the Gulf of Mexico up through the Canadian Maritimes.",
+    flavor: "Firmer meat, brinier, often a clean mineral finish; flavor swings widely by estuary.",
+    examples: ["Blue Point (NY)", "Wellfleet (MA)", "Beausoleil (NB)", "Malpeque (PEI)"],
+    regions: ["ne", "chesapeake", "gulf"],
+  },
+  {
+    id: "edulis",
+    species: "Ostrea edulis",
+    name: "European Flat (Belon)",
+    origin: "Native to Europe; small populations cultivated in Maine.",
+    flavor: "Flat, coin-shaped shell; intensely metallic, coppery, almost hazelnut finish.",
+    examples: ["Belon (France)", "Galway Flat (Ireland)"],
+    regions: ["france", "ireland"],
+  },
+  {
+    id: "lurida",
+    species: "Ostrea lurida",
+    name: "Olympia",
+    origin: "The only oyster native to the West Coast of North America.",
+    flavor: "Tiny (often quarter-sized), strong celery-salt and copper finish.",
+    examples: ["Olympia (Puget Sound)"],
+    regions: ["hood"],
+  },
+];
+
 export function PierToPlate() {
+
   return (
     <div className="space-y-6">
       <header className="rounded-lg border border-border bg-card p-4">
@@ -168,6 +256,51 @@ export function PierToPlate() {
           </ul>
         </div>
       </section>
+
+      <section className="rounded-lg border border-border bg-card p-4">
+        <h3 className="text-sm font-semibold">Oyster education</h3>
+        <p className="mt-1 text-[11px] text-muted-foreground">
+          Five species, hundreds of names. Where the oyster is grown,
+          its "merroir", drives most of the flavor difference. Most of our
+          oysters arrive from BC and Washington's Hood Canal.
+        </p>
+
+        <div className="mt-3 grid grid-cols-1 gap-4 md:grid-cols-[260px_minmax(0,1fr)]">
+          <div className="rounded-md border border-border bg-background/40 p-2">
+            <OysterMap pins={OYSTER_PINS} />
+          </div>
+
+          <Accordion type="single" collapsible className="w-full">
+            {OYSTER_FAMILIES.map((f) => (
+              <AccordionItem key={f.id} value={f.id}>
+                <AccordionTrigger className="text-left">
+                  <div className="flex flex-col">
+                    <span className="text-sm font-semibold">{f.name}</span>
+                    <span className="text-[11px] italic text-muted-foreground">
+                      {f.species}
+                    </span>
+                  </div>
+                </AccordionTrigger>
+                <AccordionContent className="space-y-2 text-xs leading-relaxed text-foreground/90">
+                  <p><span className="font-semibold">Origin: </span>{f.origin}</p>
+                  <p><span className="font-semibold">Flavor: </span>{f.flavor}</p>
+                  <div className="flex flex-wrap gap-1 pt-1">
+                    {f.examples.map((ex) => (
+                      <span
+                        key={ex}
+                        className="rounded-full border border-border bg-card px-2 py-0.5 text-[10px] uppercase tracking-wide text-muted-foreground"
+                      >
+                        {ex}
+                      </span>
+                    ))}
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
+      </section>
+
 
       <section className="grid grid-cols-1 gap-3 md:grid-cols-2">
         {STORIES.map((s) => (
@@ -250,3 +383,74 @@ function SourcingMap({ pins }: { pins: SourcePin[] }) {
     </svg>
   );
 }
+
+function OysterMap({ pins }: { pins: OysterPin[] }) {
+  return (
+    <svg
+      viewBox="0 0 100 70"
+      className="h-auto w-full"
+      aria-label="World oyster sourcing map"
+      role="img"
+    >
+      <rect x="0" y="0" width="100" height="70" fill="oklch(0.22 0.04 240)" />
+      {/* Schematic continents (not geo-accurate) */}
+      {/* North America */}
+      <path
+        d="M5 18 L22 14 L34 22 L34 38 L28 52 L18 56 L10 48 L6 36 Z"
+        fill="oklch(0.28 0.03 90)"
+        stroke="oklch(0.35 0.04 90)"
+        strokeWidth="0.3"
+      />
+      {/* South America */}
+      <path
+        d="M24 54 L30 52 L32 64 L26 68 L22 60 Z"
+        fill="oklch(0.28 0.03 90)"
+        stroke="oklch(0.35 0.04 90)"
+        strokeWidth="0.3"
+      />
+      {/* Europe / Africa */}
+      <path
+        d="M44 18 L58 16 L60 28 L56 42 L60 60 L52 64 L46 50 L44 34 Z"
+        fill="oklch(0.28 0.03 90)"
+        stroke="oklch(0.35 0.04 90)"
+        strokeWidth="0.3"
+      />
+      {/* Asia */}
+      <path
+        d="M60 14 L92 14 L96 30 L86 44 L74 42 L66 30 L62 22 Z"
+        fill="oklch(0.28 0.03 90)"
+        stroke="oklch(0.35 0.04 90)"
+        strokeWidth="0.3"
+      />
+      {/* Australia */}
+      <path
+        d="M82 54 L94 54 L94 62 L84 64 Z"
+        fill="oklch(0.28 0.03 90)"
+        stroke="oklch(0.35 0.04 90)"
+        strokeWidth="0.3"
+      />
+
+      {pins.map((p) => (
+        <g key={p.id}>
+          <circle
+            cx={p.x}
+            cy={p.y}
+            r="1.4"
+            fill="oklch(0.72 0.18 30)"
+            stroke="oklch(0.98 0 0)"
+            strokeWidth="0.4"
+          />
+          <text
+            x={p.x + 2}
+            y={p.y + 1}
+            fontSize="2.2"
+            fill="oklch(0.95 0.02 240)"
+          >
+            {p.short}
+          </text>
+        </g>
+      ))}
+    </svg>
+  );
+}
+
