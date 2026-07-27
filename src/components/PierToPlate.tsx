@@ -118,7 +118,7 @@ const STORIES: { id: string; title: string; body: string[] }[] = [
       "In 1965, brothers Al and Joe Scoma bought a six-stool coffee shop on Pier 47, cooking their mother's recipes for the local fishermen who tied up out back.",
       "Sixty years later, Scoma's is the only restaurant on Fisherman's Wharf that still receives its catch directly from boats at its own pier. Fish is unloaded, cut, and cooked all within yards of the water.",
       "Scoma's is a registered San Francisco Legacy Business, recognized by the city for its longstanding contribution to the cultural fabric of the Wharf.",
-      "The Lazy Man's Cioppino, Dungeness crab, scallops, shrimp, clams, mussels, calamari, and market fish in Mama Scoma's tomato broth, was born here and remains the dish most associated with the Wharf.",
+      "Cioppino, Dungeness crab, scallops, shrimp, clams, mussels, calamari, and market fish in a tomato and wine broth, was born on Fisherman's Wharf itself in the late 1800s, improvised by Italian and Portuguese fishermen from the day's unsold catch. It remains the dish most associated with the Wharf, and Scoma's serves its own version, the Lazy Man's Cioppino, shelled tableside-ready.",
     ],
   },
 ];
