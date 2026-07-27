@@ -133,10 +133,19 @@ type OysterPin = {
 };
 
 const OYSTER_PINS: OysterPin[] = [
-  { id: "bc", short: "BC", x: 14, y: 30 },
-  { id: "hood", short: "Hood Canal", x: 13, y: 35 },
-  { id: "tomales", short: "Tomales", x: 14, y: 44 },
-  { id: "humboldt", short: "Humboldt", x: 13, y: 41 },
+  // British Columbia growing regions
+  { id: "baynes", short: "Baynes Sound (BC)", x: 13, y: 28 },
+  { id: "cortes", short: "Cortes Island (BC)", x: 15, y: 26 },
+  { id: "effingham", short: "Effingham (BC)", x: 12, y: 30 },
+  // Washington / Hood Canal & South Puget Sound
+  { id: "hood", short: "Hood Canal (WA)", x: 14, y: 33 },
+  { id: "totten", short: "Totten Inlet (WA)", x: 16, y: 35 },
+  { id: "skookum", short: "Skookum Inlet (WA)", x: 17, y: 36 },
+  { id: "pickering", short: "Pickering Pass. (WA)", x: 18, y: 34 },
+  // California
+  { id: "tomales", short: "Tomales (CA)", x: 14, y: 44 },
+  { id: "humboldt", short: "Humboldt (CA)", x: 13, y: 41 },
+  // East / Gulf / Europe / Asia
   { id: "ne", short: "New England", x: 30, y: 38 },
   { id: "chesapeake", short: "Chesapeake", x: 29, y: 44 },
   { id: "gulf", short: "Gulf", x: 25, y: 52 },
@@ -160,19 +169,46 @@ const OYSTER_FAMILIES: OysterFamily[] = [
     id: "pacific",
     species: "Crassostrea gigas",
     name: "Pacific (Miyagi)",
-    origin: "Native to Japan; now the dominant farmed oyster on the U.S. West Coast.",
-    flavor: "Plump, creamy body with cucumber and melon notes; salinity varies by bay.",
-    examples: ["Kusshi (BC)", "Fanny Bay (BC)", "Hama Hama (Hood Canal)", "Totten Inlet (WA)"],
-    regions: ["bc", "hood", "tomales"],
+    origin: "Native to Japan; introduced to the PNW in the 1920s and now the dominant farmed oyster on the West Coast. Terroir (merroir) shifts dramatically bay to bay.",
+    flavor: "Plump, creamy body; cucumber, melon, and watermelon-rind notes. Salinity swings from mild (Hood Canal fjord water) to bracing (open Pacific).",
+    examples: [
+      "Kusshi (Deep Bay, BC), tumbled, deep cup, clean finish",
+      "Fanny Bay (Baynes Sound, BC), classic mild-brine PNW",
+      "Effingham (Barkley Sound, BC), high-salinity, seaweed finish",
+      "Sawmill Bay / Marina's Top Drawer (Cortes Island, BC)",
+      "Hama Hama (Hood Canal, WA), beach-grown, melon finish",
+      "Blue Pool (Hood Canal, WA), tumbled cocktail oyster",
+      "Hammersley Inlet (WA), sweet, low salinity",
+      "Skookum (Little Skookum Inlet, WA), watermelon-rind sweetness",
+      "Pickering Passage (WA), balanced brine and cream",
+    ],
+    regions: ["baynes", "cortes", "effingham", "hood", "pickering"],
   },
   {
     id: "kumamoto",
-    species: "Crassostrea sikamea",
+    species: "Magallana sikamea",
     name: "Kumamoto",
-    origin: "Originally from Kyushu, Japan; rescued from near-extinction by PNW farms.",
-    flavor: "Small, deep-cupped, sweet with a honeydew finish and very mild brine.",
-    examples: ["Humboldt Kumamoto (CA)", "Taylor Kumamoto (WA)"],
-    regions: ["humboldt", "hood", "japan"],
+    origin: "Originally from Kyushu, Japan; rescued from near-extinction by PNW growers. Slow-growing, distinct from Pacifics genetically.",
+    flavor: "Small, deep-cupped, sweet with a honeydew finish and very mild brine. A reliable gateway oyster.",
+    examples: [
+      "Taylor Kumamoto (Totten Inlet, WA)",
+      "Chelsea Gem (Eld Inlet, WA)",
+      "Humboldt Kumamoto (CA)",
+    ],
+    regions: ["totten", "humboldt", "japan"],
+  },
+  {
+    id: "lurida",
+    species: "Ostrea lurida",
+    name: "Olympia",
+    origin: "The only oyster native to the West Coast of North America. Nearly wiped out by 1900s over-harvest; now a small, protected specialty crop.",
+    flavor: "Tiny (often quarter-sized), coppery and metallic with a celery-salt finish that lingers.",
+    examples: [
+      "Olympia (Totten Inlet, WA)",
+      "Olympia (Little Skookum Inlet, WA)",
+      "Olympia (Oakland Bay, WA)",
+    ],
+    regions: ["totten", "skookum", "hood"],
   },
   {
     id: "virginica",
@@ -191,15 +227,6 @@ const OYSTER_FAMILIES: OysterFamily[] = [
     flavor: "Flat, coin-shaped shell; intensely metallic, coppery, almost hazelnut finish.",
     examples: ["Belon (France)", "Galway Flat (Ireland)"],
     regions: ["france", "ireland"],
-  },
-  {
-    id: "lurida",
-    species: "Ostrea lurida",
-    name: "Olympia",
-    origin: "The only oyster native to the West Coast of North America.",
-    flavor: "Tiny (often quarter-sized), strong celery-salt and copper finish.",
-    examples: ["Olympia (Puget Sound)"],
-    regions: ["hood"],
   },
 ];
 
