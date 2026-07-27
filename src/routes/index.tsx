@@ -18,7 +18,21 @@ import { Slider } from "@/components/ui/slider";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
+import { OG_IMAGE } from "@/lib/og";
+
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "Scoma's Pro · Wine List" },
+      { name: "description", content: "Search Scoma's San Francisco wine list by vintage, type, region, and price." },
+      { property: "og:title", content: "Scoma's Pro · Wine List" },
+      { property: "og:description", content: "Search Scoma's San Francisco wine list by vintage, type, region, and price." },
+      { property: "og:image", content: OG_IMAGE },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: OG_IMAGE },
+    ],
+  }),
   component: Index,
 });
 
