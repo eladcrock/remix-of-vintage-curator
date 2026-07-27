@@ -16,7 +16,21 @@ import { CocktailCard } from "@/components/CocktailCard";
 import { ALL_COCKTAILS, filterCocktails, allDietaryTags } from "@/lib/cocktails";
 import { Input } from "@/components/ui/input";
 
+import { OG_IMAGE } from "@/lib/og";
+
 export const Route = createFileRoute("/bar")({
+  head: () => ({
+    meta: [
+      { title: "Scoma's Pro · Bar Program" },
+      { name: "description", content: "Scoma's cocktails, mocktails, and beer list with build specs and tasting notes." },
+      { property: "og:title", content: "Scoma's Pro · Bar Program" },
+      { property: "og:description", content: "Scoma's cocktails, mocktails, and beer with build specs and tasting notes." },
+      { property: "og:image", content: OG_IMAGE },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: OG_IMAGE },
+    ],
+  }),
   component: BarProgramPage,
 });
 

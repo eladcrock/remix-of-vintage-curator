@@ -21,7 +21,21 @@ import {
 } from "@/lib/food";
 import { Input } from "@/components/ui/input";
 
+import { OG_IMAGE } from "@/lib/og";
+
 export const Route = createFileRoute("/food")({
+  head: () => ({
+    meta: [
+      { title: "Scoma's Pro · Food Menu" },
+      { name: "description", content: "Scoma's San Francisco menu, seafood classics, pastas, and daily catch with allergen filters." },
+      { property: "og:title", content: "Scoma's Pro · Food Menu" },
+      { property: "og:description", content: "Scoma's San Francisco menu with allergen filters and dish detail cards." },
+      { property: "og:image", content: OG_IMAGE },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: OG_IMAGE },
+    ],
+  }),
   component: FoodPage,
 });
 

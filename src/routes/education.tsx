@@ -16,13 +16,19 @@ import { winesForRegion, zoneColor } from "@/lib/education";
 import type { Wine } from "@/lib/wines";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 
+import { OG_IMAGE } from "@/lib/og";
+
 export const Route = createFileRoute("/education")({
   head: () => ({
     meta: [
       { title: "Scoma's Pro · Education" },
-      { name: "description", content: "Region-coded wine mindmap, Scoma's Wine Class #1–#5, cross-referenced with our list." },
+      { name: "description", content: "Pier to Plate sustainability, oyster education, and a region-coded wine mindmap cross-referenced with Scoma's list." },
       { property: "og:title", content: "Scoma's Pro · Education" },
-      { property: "og:description", content: "Where knowledge meets service, a region-coded wine mindmap." },
+      { property: "og:description", content: "Pier to Plate sustainability, oyster education, and a region-coded wine mindmap." },
+      { property: "og:image", content: OG_IMAGE },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: OG_IMAGE },
     ],
   }),
   component: EducationPage,
