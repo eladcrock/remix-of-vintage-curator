@@ -13,14 +13,22 @@ import { MenuOptionCard } from "@/components/MenuOptionCard";
 import { curateMenus } from "@/lib/curator";
 import type { ExperienceRequest, MenuOption } from "@/lib/experiences";
 
+import { OG_IMAGE } from "@/lib/og";
+
 export const Route = createFileRoute("/experiences")({
   head: () => ({
     meta: [
       { title: "Scoma's Pro · Experiences" },
       {
         name: "description",
-        content: "AI-curated chef's tasting menus by budget and dietary needs.",
+        content: "Curated chef's tasting menus for Scoma's by budget and dietary needs.",
       },
+      { property: "og:title", content: "Scoma's Pro · Experiences" },
+      { property: "og:description", content: "Curated chef's tasting menus for Scoma's by budget and dietary needs." },
+      { property: "og:image", content: OG_IMAGE },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: OG_IMAGE },
     ],
   }),
   component: ExperiencesPage,
