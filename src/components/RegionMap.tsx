@@ -6,17 +6,17 @@
 import type { Region, Country } from "@/data/education";
 import { REGION_COORDS } from "@/data/regionCoords";
 import { zoneColor } from "@/lib/education";
-import { geoMercator, geoPath, type GeoProjection } from "d3-geo";
+import { geoMercator, geoPath, type GeoProjection, type GeoPermissibleObjects } from "d3-geo";
 import { useEffect, useMemo, useRef, useState } from "react";
 
 import italyGeo from "@/data/geo/italy.json";
 import franceGeo from "@/data/geo/france.json";
 import californiaGeo from "@/data/geo/california.json";
 
-const GEO: Record<Country, GeoJSON.Feature> = {
-  Italy: italyGeo as GeoJSON.Feature,
-  France: franceGeo as GeoJSON.Feature,
-  California: californiaGeo as GeoJSON.Feature,
+const GEO: Record<Country, GeoPermissibleObjects> = {
+  Italy: italyGeo as unknown as GeoPermissibleObjects,
+  France: franceGeo as unknown as GeoPermissibleObjects,
+  California: californiaGeo as unknown as GeoPermissibleObjects,
 };
 
 /** Project the country into a 0..100 x 0..100 SVG viewport with a small margin. */
@@ -24,10 +24,10 @@ function buildProjection(country: Country): { projection: GeoProjection; outline
   const feature = GEO[country];
   const projection = geoMercator().fitExtent(
     [[4, 4], [96, 96]],
-    feature as GeoJSON.GeoJsonObject,
+    feature,
   );
   const path = geoPath(projection);
-  const outline = path(feature as GeoJSON.GeoJsonObject) ?? "";
+  const outline = path(feature) ?? "";
   return { projection, outline };
 }
 
