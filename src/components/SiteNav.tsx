@@ -14,11 +14,11 @@ type Tab = {
 
 const TABS: Tab[] = [
   { to: "/", label: "Wines", enabled: true },
-  { to: "/bar", label: "Bar program", enabled: true },
+  { to: "/bar", label: "Bar", enabled: true },
   { to: "/food", label: "Food", enabled: true },
   { to: "/experiences", label: "Experiences", enabled: true },
   { to: "/education", label: "Education", enabled: true },
-  { to: "/about", label: "About Scoma's", enabled: true },
+  { to: "/about", label: "About", enabled: true },
 ];
 
 export function SiteNav({
