@@ -77,9 +77,6 @@ function AboutPage() {
               loading="eager"
               className="aspect-[5/4] w-full object-cover"
             />
-            <figcaption className="px-3 py-2 text-[11px] text-muted-foreground">
-              {MEDIA[0].caption}
-            </figcaption>
           </figure>
         </section>
 
@@ -210,9 +207,6 @@ function AboutPage() {
                   loading="lazy"
                   className="aspect-square w-full object-cover transition-transform hover:scale-105"
                 />
-                <figcaption className="px-2 py-1.5 text-[10px] leading-tight text-muted-foreground">
-                  {m.caption}
-                </figcaption>
               </figure>
             ))}
           </div>
