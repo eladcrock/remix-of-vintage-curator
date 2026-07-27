@@ -14,6 +14,8 @@ import {
   VIDEOS,
 } from "@/data/story";
 
+import { OG_IMAGE } from "@/lib/og";
+
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
@@ -29,7 +31,10 @@ export const Route = createFileRoute("/about")({
         content:
           "The story behind the only restaurant on Fisherman's Wharf that still receives its catch at its own pier.",
       },
-      { property: "og:image", content: MEDIA[0]?.src },
+      { property: "og:image", content: OG_IMAGE },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: OG_IMAGE },
     ],
   }),
   component: AboutPage,
