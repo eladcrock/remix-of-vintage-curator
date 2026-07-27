@@ -14,11 +14,11 @@ type Tab = {
 
 const TABS: Tab[] = [
   { to: "/", label: "Wines", enabled: true },
-  { to: "/bar", label: "Bar program", enabled: true },
+  { to: "/bar", label: "Bar", enabled: true },
   { to: "/food", label: "Food", enabled: true },
   { to: "/experiences", label: "Experiences", enabled: true },
   { to: "/education", label: "Education", enabled: true },
-  { to: "/about", label: "About Scoma's", enabled: true },
+  { to: "/about", label: "About", enabled: true },
 ];
 
 export function SiteNav({
@@ -41,7 +41,7 @@ export function SiteNav({
             )}
           </div>
         </div>
-        <nav className="-mx-4 flex gap-1 overflow-x-auto px-4 text-xs scrollbar-none sm:mx-0 sm:px-0">
+        <nav className="flex flex-wrap gap-1 text-xs sm:flex-nowrap">
           {TABS.map((t) => {
             const active =
               t.to === "/" ? pathname === "/" : pathname.startsWith(t.to);
