@@ -41,7 +41,7 @@ export function SiteNav({
             )}
           </div>
         </div>
-        <nav className="-mx-4 flex gap-1 overflow-x-auto px-4 text-xs scrollbar-none sm:mx-0 sm:px-0">
+        <nav className="flex flex-wrap gap-1 text-xs sm:flex-nowrap">
           {TABS.map((t) => {
             const active =
               t.to === "/" ? pathname === "/" : pathname.startsWith(t.to);
